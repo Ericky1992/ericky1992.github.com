@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。
+##1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下：
+##2.关于gmpGMP简介：GMP是著名的任意精度算术运算库">
+  
+  <meta name="description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。 ##1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下： ##2.关于gmpGMP简介：GMP是著名的任意精度算术运算库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ericky1992">
+<meta property="og:url" content="http://yoursite.com/2017/08/26/看雪2017CTF第十题/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。 ##1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下： ##2.关于gmpGMP简介：GMP是著名的任意精度算术运算库">
+<meta property="og:image" content="http://img.blog.csdn.net/20170630162246756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170630162403992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-26T15:22:30.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ericky1992">
+<meta name="twitter:description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。 ##1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下： ##2.关于gmpGMP简介：GMP是著名的任意精度算术运算库">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170630162246756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="Ericky1992" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">忘記妳是最痛苦的解藥</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2017/08/26/看雪2017CTF第十题/">
+  <time datetime="2017-08-26T15:22:51.611Z">
+    2017-08-26
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。</p>
+<p>##1.初探<br>程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下：<br><img src="http://img.blog.csdn.net/20170630162246756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>##2.关于gmp<br>GMP简介：GMP是著名的任意精度算术运算库，支持任意精度的整数、有理数以及浮点数的四则运算、求模、求幂、开方等基本运算，还支持部分数论相关运算。Maple、Mathematica等大型数学软件的高精度算术运算功能都是利用GMP实现的。</p>
+<p>理清楚函数的意思，可以来看看到底实现了什么。<br>介绍一下目标程序使用的一些gmp函数，如下：<br>void mpz_init (mpz_t x)<br>初始化x。任何一个mpz_t类型的变量在使用前都应该初始化。</p>
+<p>int mpz_init_set_str (mpz_t rop, const char *str, int base)<br>初始化rop，并赋值rop = str，其中str是一个表示base进制整数的字符数组</p>
+<p>int mpz_probab_prime_p (const mpz_t n, int reps)<br>检测n是否为素数。该函数首先对n进行试除，然后使用米勒-拉宾素性检测对n进行测试，reps表示进行检测的次数。如果n为素数，返回2；如果n可能为素数，返回1；如果n为合数，返回0。</p>
+<p>void mpz_mul (mpz_t rop, const mpz_t op1, const mpz_t op2)<br>计算op1 * op2，结果保存在rop中</p>
+<p>int mpz_invert(mpz_t rop, const mpz_t op1, const mpz_t op2)<br>求数论倒数函数</p>
+<p>void mpz_init_set_si (mpz_t rop, signed long int op)<br>初始化rop，并将其值设置为op</p>
+<p>int mpz_cmp (mpz_t op1, mpz_t op2)<br>比较函数</p>
+<p>void mpz_mod (mpz_t r, const mpz_t n, const mpz_t d)<br>求模函数，返回值不为负数</p>
+<p>把这些函数的意思弄明白了，就能发现这是一个RSA算法：</p>
+<p>RSA算法大体可以分为三个部分：<br>生成密钥对<br>加密<br>解密<br>其中生成密钥对包括以下步骤：<br>随机生成两个足够大的素数<br>p,q<br>计算公共模数n<br>n=p∗q<br>计算欧拉函数<br>φ(n)=(p−1)∗(q−1)<br>选取一较小的与φ(n)互质的正整数e作为公共指数。则数对(n, e)为密钥对中的公钥<br>计算<br>d=e−1(modϕ(n))<br>则数对(n, d)为密钥对中的私钥<br>这里推荐2篇RSA相关文章<br><a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html</a><br><a href="http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html</a></p>
+<p>搞懂了这些之后，就可以开始写程序了</p>
+<p>##3.脚本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">import gmpy2</div><div class="line">			  </div><div class="line">N = gmpy2.mpz(0x6248BC3AB92A33B000FDB88568F19727F92F79EB68FF6AD73203EFD20A3E331BE941C7AA288095F33BC4B255FD983114D480EFFBEE2E313E6218A57F9CCC8189)</div><div class="line">d = gmpy2.mpz(0x2476A7F02588913F228923E1F36F963F29708C07B117396817A6B94C336FC77FF7D381925EB40CFED8FBE894570155E41569B4EC69B26CB0320105A29651CB4B)</div><div class="line">e = gmpy2.mpz(0x1)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line"></div><div class="line">	while e &lt; 0x1000000:</div><div class="line">		e = e +1</div><div class="line">		kfi = gmpy2.mul(e,d)-1</div><div class="line">		k = gmpy2.div(kfi,N)</div><div class="line"></div><div class="line">		if kfi%(k+1) == 0:		</div><div class="line">			x = 1-kfi/(k+1)+N</div><div class="line">			if x &gt; 0 and x &lt; 0x100000000000000000000000000000000000000000000000000000000000000000:</div><div class="line">				print &apos;e:&apos; + hex(e)</div><div class="line">				print &apos;x:&apos; + hex(x)</div><div class="line">				continue;</div><div class="line"></div><div class="line"></div><div class="line">	#X2 = gmpy2.mul(x,x)</div><div class="line">	#N4 = gmpy2.mul(N,4)</div><div class="line">	#delta = gmpy2.sub(X2,N4)</div><div class="line"></div><div class="line">	delta_root = gmpy2.mpz(0x23c4ffb7dff4f383202beb418be684edaad4c1838af43e9ea0a731d0ea495f00)</div><div class="line">	print &apos;delta_root:&apos; + hex(delta_root)</div><div class="line">	fenzi = gmpy2.add(x,delta_root)</div><div class="line">	fenzi2 = gmpy2.sub(x,delta_root)</div><div class="line">	p1 =  gmpy2.div(fenzi,2)</div><div class="line">	p2 = gmpy2.div(fenzi2,2)</div><div class="line">	print &apos;p1 =&apos; + hex(p1) </div><div class="line">	print &apos;p2 =&apos; + hex(p2)</div></pre></td></tr></table></figure>
+<p>结果：<br><img src="http://img.blog.csdn.net/20170630162403992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>答案：<br>F552B38DBDDE72E2E693B2AED5C769C0DCB3DA83534480A80E652FFE53544CD91A18C3</p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

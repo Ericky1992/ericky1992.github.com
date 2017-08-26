@@ -4,21 +4,30 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
-  <title>Ericky1992</title>
+  <title>看雪2017CTF第十题 | Ericky1992</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
     <meta name="author" content="Ericky1992">
   
   
-  <meta name="description" content="忘記妳是最痛苦的解藥">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ericky1992">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。
+1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下：
+2.关于gmpGMP简介：GMP是著名的任意精度算术运算库，支持任">
+  
+  <meta name="description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。 1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下： 2.关于gmpGMP简介：GMP是著名的任意精度算术运算库，支持任">
+<meta name="keywords" content="函数 rsa 源代码 调试 逆向分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="看雪2017CTF第十题">
+<meta property="og:url" content="http://yoursite.com/2017/06/30/看雪2017CTF第十题/index.html">
 <meta property="og:site_name" content="Ericky1992">
-<meta property="og:description" content="忘記妳是最痛苦的解藥">
+<meta property="og:description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。 1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下： 2.关于gmpGMP简介：GMP是著名的任意精度算术运算库，支持任">
+<meta property="og:image" content="http://img.blog.csdn.net/20170630162246756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170630162403992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-26T15:39:53.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ericky1992">
-<meta name="twitter:description" content="忘記妳是最痛苦的解藥">
+<meta name="twitter:title" content="看雪2017CTF第十题">
+<meta name="twitter:description" content="对gmp和RSA不熟悉，从头到尾追了很长时间。这两天也逼着自己熟悉了很多东西，学到了不少。 1.初探程序是X64的，不管三七二十一，先拖到IDA里面看一下，由于一开始都不知道gmp是什么东西，便一边用OD调试，一边IDA傻傻看代码，一个函数一个函数看。经过漫长而又漫长的分析，结合阅读gmp的源代码，把IDA中的函数对应上了，如下： 2.关于gmpGMP简介：GMP是著名的任意精度算术运算库，支持任">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170630162246756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
   
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -50,13 +59,7 @@
   </nav>
   <div class="clearfix"></div>
 </header>
-    <div class="content">
-
-
-
-
-  
-    <article class="post">
+    <div class="content"><article class="post">
   <header>
     
       <div class="icon"></div>
@@ -68,7 +71,7 @@
     
     
   
-    <h1 class="title"><a href="/2017/06/30/看雪2017CTF第十题/">看雪2017CTF第十题</a></h1>
+    <h1 class="title">看雪2017CTF第十题</h1>
   
 
   </header>
@@ -95,23 +98,22 @@
 
     
   </div>
-  <footer class="end-sep">
+  <footer>
     
       
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
       
+  <div class="tags">
+    <a class="tags-link" href="/tags/函数-rsa-源代码-调试-逆向分析/">函数 rsa 源代码 调试 逆向分析</a>
+  </div>
+
     
     <div class="clearfix"></div>
   </footer>
 </article>
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
 
 </div>
   </div>
