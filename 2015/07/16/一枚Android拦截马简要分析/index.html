@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>一枚Android拦截马简要分析 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="一枚Android拦截马简要分析【文章标题】:一枚Android拦截马简要分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 由于恶意程序，不提供下载【保护方式】: 阿里加固【作者声明】: 本人水平有限，若有不足错误之处请指正
+0x1 脱壳脱壳后包名结构如下：
+0x2 获取内容主要获取短信，联系人以及通话记录。
+0x3 混淆加密手法">
+  
+  <meta name="description" content="一枚Android拦截马简要分析【文章标题】:一枚Android拦截马简要分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 由于恶意程序，不提供下载【保护方式】: 阿里加固【作者声明】: 本人水平有限，若有不足错误之处请指正 0x1 脱壳脱壳后包名结构如下： 0x2 获取内容主要获取短信，联系人以及通话记录。 0x3 混淆加密手法">
+<meta name="keywords" content="木马 Android 逆向分析 破解 病毒分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一枚Android拦截马简要分析">
+<meta property="og:url" content="http://yoursite.com/2015/07/16/一枚Android拦截马简要分析/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="一枚Android拦截马简要分析【文章标题】:一枚Android拦截马简要分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 由于恶意程序，不提供下载【保护方式】: 阿里加固【作者声明】: 本人水平有限，若有不足错误之处请指正 0x1 脱壳脱壳后包名结构如下： 0x2 获取内容主要获取短信，联系人以及通话记录。 0x3 混淆加密手法">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717092809079">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717092834903">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717092854202">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717092911179">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717092953956">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717093023213">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717093204442">
+<meta property="og:updated_time" content="2017-08-27T16:25:25.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一枚Android拦截马简要分析">
+<meta name="twitter:description" content="一枚Android拦截马简要分析【文章标题】:一枚Android拦截马简要分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 由于恶意程序，不提供下载【保护方式】: 阿里加固【作者声明】: 本人水平有限，若有不足错误之处请指正 0x1 脱壳脱壳后包名结构如下： 0x2 获取内容主要获取短信，联系人以及通话记录。 0x3 混淆加密手法">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150717092809079">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/07/16/一枚Android拦截马简要分析/">
+  <time datetime="2015-07-16T01:33:00.000Z">
+    2015-07-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">一枚Android拦截马简要分析</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="一枚Android拦截马简要分析"><a href="#一枚Android拦截马简要分析" class="headerlink" title="一枚Android拦截马简要分析"></a>一枚Android拦截马简要分析</h1><p>【文章标题】:一枚Android拦截马简要分析<br>【文章作者】: Ericky<br>【作者博客】: <a href="http://blog.csdn.net/hk9259" target="_blank" rel="external">http://blog.csdn.net/hk9259</a><br>【下载地址】: 由于恶意程序，不提供下载<br>【保护方式】: 阿里加固<br>【作者声明】: 本人水平有限，若有不足错误之处请指正</p>
+<h2 id="0x1-脱壳"><a href="#0x1-脱壳" class="headerlink" title="0x1 脱壳"></a>0x1 脱壳</h2><p>脱壳后包名结构如下：<br><img src="http://img.blog.csdn.net/20150717092809079" alt="这里写图片描述"></p>
+<h2 id="0x2-获取内容"><a href="#0x2-获取内容" class="headerlink" title="0x2 获取内容"></a>0x2 获取内容</h2><p><img src="http://img.blog.csdn.net/20150717092834903" alt="这里写图片描述"><br>主要获取短信，联系人以及通话记录。</p>
+<h2 id="0x3-混淆加密手法"><a href="#0x3-混淆加密手法" class="headerlink" title="0x3 混淆加密手法"></a>0x3 混淆加密手法</h2><p>利用大量的莫须有的Toast，诱使用户安装激活此木马：<br><img src="http://img.blog.csdn.net/20150717092854202" alt="这里写图片描述"><br>利用staker为字符串加密算法的密钥，对持有者的各种信息进行了加密：<br><img src="http://img.blog.csdn.net/20150717092911179" alt="这里写图片描述"></p>
+<h2 id="0x4-解密关键信息"><a href="#0x4-解密关键信息" class="headerlink" title="0x4 解密关键信息"></a>0x4 解密关键信息</h2><p>此APK信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">接受短信号码：132XXXX5048</div><div class="line">发送邮箱帐号：m18221410034@163.com</div><div class="line">发送邮箱密码：bhrmlvzvtejsffor(已失效）</div><div class="line">接受邮箱帐号：m18221410034@163.com</div></pre></td></tr></table></figure>
+<p>App使用时长：到<img src="http://img.blog.csdn.net/20150717092953956" alt="这里写图片描述">失效</p>
+<h2 id="0x5-实验测试"><a href="#0x5-实验测试" class="headerlink" title="0x5 实验测试"></a>0x5 实验测试</h2><p>手机端远程控制端信息如下：<br><img src="http://img.blog.csdn.net/20150717093023213" alt="这里写图片描述"><br>邮箱截获短信，联系人等信息如下：<br><img src="http://img.blog.csdn.net/20150717093204442" alt="这里写图片描述"></p>
+<h2 id="0x6-总结"><a href="#0x6-总结" class="headerlink" title="0x6 总结"></a>0x6 总结</h2><p>现在移动端支付以及各种app应用趋于成熟，但安全性这一块还很值得商榷。在如今这种得一手机得天下的时代，改木马危害性极其高。所有用户短信能被截获，导致用户无法收取正常短信，犯罪分子用其盗用用户的各种帐号密码，从而实现资金转账以及诈骗金钱的目的。<br>所以大家千万小心。</p>
+<p>2015.07.16<br>Ericky</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/木马-Android-逆向分析-破解-病毒分析/">木马 Android 逆向分析 破解 病毒分析</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

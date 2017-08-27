@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Samp免流软件以及地铁跑酷的自校验分析 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="【文章标题】:Samp免流软件以及地铁跑酷的自校验分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 自行百度【保护方式】: 自校验【作者声明】: 本人水平有限，若有不足错误之处请指正
+0x1前言群里讨论的两款软件的自校验，一开始有人说是签名校验，而且说找不到地方，下面就说一下我的拙见，若有错误之处，望各位大侠不吝指正
+0x2样本一">
+  
+  <meta name="description" content="【文章标题】:Samp免流软件以及地铁跑酷的自校验分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 自行百度【保护方式】: 自校验【作者声明】: 本人水平有限，若有不足错误之处请指正 0x1前言群里讨论的两款软件的自校验，一开始有人说是签名校验，而且说找不到地方，下面就说一下我的拙见，若有错误之处，望各位大侠不吝指正 0x2样本一">
+<meta name="keywords" content="apk破解 apk脱壳 逆向分析 自校验 梆梆加固">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Samp免流软件以及地铁跑酷的自校验分析">
+<meta property="og:url" content="http://yoursite.com/2015/07/25/Samp免流软件以及地铁跑酷的自校验分析/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="【文章标题】:Samp免流软件以及地铁跑酷的自校验分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 自行百度【保护方式】: 自校验【作者声明】: 本人水平有限，若有不足错误之处请指正 0x1前言群里讨论的两款软件的自校验，一开始有人说是签名校验，而且说找不到地方，下面就说一下我的拙见，若有错误之处，望各位大侠不吝指正 0x2样本一">
+<meta property="og:image" content="http://img.blog.csdn.net/20150726103857521">
+<meta property="og:image" content="http://img.blog.csdn.net/20150726103911468">
+<meta property="og:image" content="http://img.blog.csdn.net/20150726104229358">
+<meta property="og:image" content="http://img.blog.csdn.net/20150726104211507">
+<meta property="og:image" content="http://img.blog.csdn.net/20150726104237326">
+<meta property="og:updated_time" content="2017-08-27T16:23:35.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Samp免流软件以及地铁跑酷的自校验分析">
+<meta name="twitter:description" content="【文章标题】:Samp免流软件以及地铁跑酷的自校验分析【文章作者】: Ericky【作者博客】: http://blog.csdn.net/hk9259【下载地址】: 自行百度【保护方式】: 自校验【作者声明】: 本人水平有限，若有不足错误之处请指正 0x1前言群里讨论的两款软件的自校验，一开始有人说是签名校验，而且说找不到地方，下面就说一下我的拙见，若有错误之处，望各位大侠不吝指正 0x2样本一">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150726103857521">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/07/25/Samp免流软件以及地铁跑酷的自校验分析/">
+  <time datetime="2015-07-25T02:45:00.000Z">
+    2015-07-25
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Samp免流软件以及地铁跑酷的自校验分析</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>【文章标题】:Samp免流软件以及地铁跑酷的自校验分析<br>【文章作者】: Ericky<br>【作者博客】: <a href="http://blog.csdn.net/hk9259" target="_blank" rel="external">http://blog.csdn.net/hk9259</a><br>【下载地址】: 自行百度<br>【保护方式】: 自校验<br>【作者声明】: 本人水平有限，若有不足错误之处请指正</p>
+<h1 id="0x1前言"><a href="#0x1前言" class="headerlink" title="0x1前言"></a>0x1前言</h1><p>群里讨论的两款软件的自校验，一开始有人说是签名校验，而且说找不到地方，下面就说一下我的拙见，若有错误之处，望各位大侠不吝指正</p>
+<h1 id="0x2样本一"><a href="#0x2样本一" class="headerlink" title="0x2样本一"></a>0x2样本一</h1><h2 id="Samp免流软件–版本1-96"><a href="#Samp免流软件–版本1-96" class="headerlink" title="Samp免流软件–版本1.96"></a>Samp免流软件–版本1.96</h2><p>在Mainactivity中的Oncreate方法中可发现一些多的代码：<br><img src="http://img.blog.csdn.net/20150726103857521" alt="这里写图片描述"><br>删除上述两句，往下分析，发现所谓的“签名校验”实质如下：<br><img src="http://img.blog.csdn.net/20150726103911468" alt="这里写图片描述"><br>所谓的“签名校验”其实就是取了整个apk的大小，大小若改变了则判断为盗版APK，因此之需要奖之前的包大小return回去即可达到目的。<br>最后再删掉XML中的如下多余代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;meta-data android:name=&quot;BANGCLE_SDK_VERSION&quot; android:value=&quot;1005&quot; /&gt;         </div><div class="line">&lt;meta-data android:name=&quot;BANGCLE_APP_KEY&quot; android:value=&quot;web_194926&quot; /&gt;         </div><div class="line">&lt;receiver android:name=&quot;neo.proxy.DistributeReceiver&quot; android:exported=&quot;false&quot;&gt;             </div><div class="line">&lt;intent-filter&gt;                 &lt;action android:name=&quot;android.intent.action.ACTION_POWER_CONNECTED&quot; /&gt;                 </div><div class="line">&lt;action android:name=&quot;com.secneo.plugin.action.HOURLY&quot; /&gt;                 </div><div class="line">&lt;action android:name=&quot;com.secneo.plugin.action.DAILY&quot; /&gt;                 </div><div class="line">&lt;action android:name=&quot;com.secneo.plugin.action.APP_STARTED&quot; /&gt;                 </div><div class="line">&lt;action android:name=&quot;android.net.conn.CONNECTIVITY_CHANGE&quot; /&gt;                 </div><div class="line">&lt;action android:name=&quot;com.secneo.proxy.action.CUSTOM&quot; /&gt;             </div><div class="line">&lt;/intent-filter&gt;         </div><div class="line">&lt;/receiver&gt;         </div><div class="line">&lt;service android:name=&quot;neo.proxy.FastService&quot; android:exported=&quot;false&quot; /&gt;         </div><div class="line">&lt;activity android:theme=&quot;@android:style/Theme.Dialog&quot; android:name=&quot;neo.proxy.ToolActivity&quot; android:excludeFromRecents=&quot;true&quot; android:launchMode=&quot;singleInstance&quot; android:configChanges=&quot;keyboardHidden|orientation&quot;&gt;             </div><div class="line">&lt;intent-filter&gt;                 </div><div class="line">&lt;action android:name=&quot;com.secneo.proxy.action.CUSTOM&quot; /&gt;                 </div><div class="line">&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;             </div><div class="line">&lt;/intent-filter&gt;         </div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure>
+<p>BB加固的校验就完美去除，剩下的就是破解的事情了。</p>
+<h1 id="0x3-样本二"><a href="#0x3-样本二" class="headerlink" title="0x3 样本二"></a>0x3 样本二</h1><h2 id="地铁跑酷游戏–版本2-34"><a href="#地铁跑酷游戏–版本2-34" class="headerlink" title="地铁跑酷游戏–版本2.34"></a>地铁跑酷游戏–版本2.34</h2><p>重打包后会出现如下提示：<br><img src="http://img.blog.csdn.net/20150726104229358" alt="这里写图片描述"></p>
+<p>搜索后发现并不能搜到关键字，试着搜索一下”download”,便定位到了关键类如下：</p>
+<p><img src="http://img.blog.csdn.net/20150726104211507" alt="这里写图片描述"><br>接下来的就是将所有fake引用值改为false即可完美绕过去了。一共有四处，其中一处如下：<br><img src="http://img.blog.csdn.net/20150726104237326" alt="这里写图片描述"></p>
+<h1 id="0x4-总结"><a href="#0x4-总结" class="headerlink" title="0x4 总结"></a>0x4 总结</h1><p>去自校验定位很重要，而不仅仅是看别人的文章后学会搜Signature。因为自校验并不止签名一种方式，另一方面来说，绕过自校验也不一定需要知道检测签名的函数。<br>By Ericky<br>2015.7.25</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/apk破解-apk脱壳-逆向分析-自校验-梆梆加固/">apk破解 apk脱壳 逆向分析 自校验 梆梆加固</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

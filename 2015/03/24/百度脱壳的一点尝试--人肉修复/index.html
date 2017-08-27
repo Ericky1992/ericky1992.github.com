@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>百度脱壳的一点尝试--人肉修复 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="前言最近把研究dex的脱壳，顺便又是再次熟悉了一下dex的标准格式以及dex被解析后在内存中所存在的格式。自己上官网加了一个壳子，发现跑不起来。于是求助几个基友，最后样本是海总给的apk，很全面，带有Activity、Application、BroadcastReceiver、ContentProvider、以及Service。
+0x1    加壳前后对比
+加固后的文件列表变化:新增一个so文件以">
+  
+  <meta name="description" content="前言最近把研究dex的脱壳，顺便又是再次熟悉了一下dex的标准格式以及dex被解析后在内存中所存在的格式。自己上官网加了一个壳子，发现跑不起来。于是求助几个基友，最后样本是海总给的apk，很全面，带有Activity、Application、BroadcastReceiver、ContentProvider、以及Service。 0x1    加壳前后对比 加固后的文件列表变化:新增一个so文件以">
+<meta name="keywords" content="百度 apk脱壳 逆向分析 人肉修复 百度脱壳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度脱壳的一点尝试--人肉修复">
+<meta property="og:url" content="http://yoursite.com/2015/03/24/百度脱壳的一点尝试--人肉修复/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="前言最近把研究dex的脱壳，顺便又是再次熟悉了一下dex的标准格式以及dex被解析后在内存中所存在的格式。自己上官网加了一个壳子，发现跑不起来。于是求助几个基友，最后样本是海总给的apk，很全面，带有Activity、Application、BroadcastReceiver、ContentProvider、以及Service。 0x1    加壳前后对比 加固后的文件列表变化:新增一个so文件以">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811223924860">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224150817">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224213172">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224352059">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224405165">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224427474">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224456007">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224512558">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224535162">
+<meta property="og:image" content="http://img.blog.csdn.net/20150811224551062">
+<meta property="og:updated_time" content="2017-08-27T16:16:25.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度脱壳的一点尝试--人肉修复">
+<meta name="twitter:description" content="前言最近把研究dex的脱壳，顺便又是再次熟悉了一下dex的标准格式以及dex被解析后在内存中所存在的格式。自己上官网加了一个壳子，发现跑不起来。于是求助几个基友，最后样本是海总给的apk，很全面，带有Activity、Application、BroadcastReceiver、ContentProvider、以及Service。 0x1    加壳前后对比 加固后的文件列表变化:新增一个so文件以">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150811223924860">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/24/百度脱壳的一点尝试--人肉修复/">
+  <time datetime="2015-03-24T14:47:00.000Z">
+    2015-03-24
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">百度脱壳的一点尝试--人肉修复</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近把研究dex的脱壳，顺便又是再次熟悉了一下dex的标准格式以及dex被解析后在内存中所存在的格式。自己上官网加了一个壳子，发现跑不起来。于是求助几个基友，最后样本是海总给的apk，很全面，带有Activity、Application、BroadcastReceiver、ContentProvider、以及Service。</p>
+<h1 id="0x1-加壳前后对比"><a href="#0x1-加壳前后对比" class="headerlink" title="0x1    加壳前后对比"></a>0x1    加壳前后对比</h1><p><img src="http://img.blog.csdn.net/20150811223924860" alt="这里写图片描述"></p>
+<p>加固后的文件列表变化:<br>新增一个so文件以及一个jar包：<br>libbaiduprotect.so<br>baiduprotect.jar<br>修改:<br>META-INF文件夹<br>AndroidManifest.xml<br>Classes.dex</p>
+<h1 id="0x2-IDA尝试"><a href="#0x2-IDA尝试" class="headerlink" title="0x2    IDA尝试"></a>0x2    IDA尝试</h1><p>用IDA来远程调试，直接跑挂了。看来有反调试。<br>从壳入口Java层找到如下语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> static &#123;</div><div class="line">        if(!Debug.isDebuggerConnected()) &#123;</div><div class="line">            String v0 = Build.CPU_ABI;</div><div class="line">            if(v0 != null &amp;&amp; (v0.startsWith(&quot;x86&quot;))) &#123;</div><div class="line">                StubApplication.loadX86Library();</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            System.loadLibrary(&quot;baiduprotect&quot;);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>把第一个if删掉之后，程序顺利的加载了baiduprotect.so，顺利的进入了壳的领空，不过不知道是程序在so里面做了完整性校验还是再次检测了debuggerconnected，每次跑都是进入了一个死循环后，然后程序就跑挂了，跑了很多次都是难以逃出那个trap。这个时候就比较纠结了。既然反调试过不去，想起360的壳子用DD也可以脱的很完美，那就换个方式试试。</p>
+<h1 id="0x3-DD大法"><a href="#0x3-DD大法" class="headerlink" title="0x3 DD大法"></a>0x3 DD大法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dd if=/proc/PID/mem of=XX skip=0 ibs=1 count=LENGTH </div><div class="line">skip改成偏移地址</div><div class="line">偏移地址 </div><div class="line">cat /proc/pid/maps</div></pre></td></tr></table></figure>
+<p>1.这里首先要感谢下wbyang博士猛男，这个DD大法也是上次挑战赛之后向他学来的。程序跑起来，把内存都dump出来，大概是100多mb的东西。找几个字符串，然后向上翻，找到dex文件的头，发现是被抹掉的。如图：<br><img src="http://img.blog.csdn.net/20150811224150817" alt="这里写图片描述"><br>前面红色框的8字节是odex的magic头。后面的0x70字节是dex的头。除了一些size和编码标志没有被抹掉，其他的已经是面目全非,修复后如下：<br><img src="http://img.blog.csdn.net/20150811224213172" alt="这里写图片描述"><br>这下把dex文件抠出来了。<br>2.把dex反编译成smali文件<br>出现如下错误：</p>
+<p><img src="http://img.blog.csdn.net/20150811224352059" alt="这里写图片描述"></p>
+<p>反复检查后发现了如下是CodeItems下面的offset错误：<br><img src="http://img.blog.csdn.net/20150811224405165" alt="这里写图片描述"><br>Dex的文件大小才0xA30DC，而offset指向了外面的东西。当然是无法解析的，这里我是有一个问题的，第三个偏移，这个0x0220E8E8，指向的是前面的内存，这是如何做到的？我个人认为是百度是在加载完成之后故意改成这个数字的。若有错误，还望前辈不吝指正。<br>把这三个offset 都改成0就可以达到反编译成功，当然是在缺三个DataItem的前提下编译成功的。找到被抹掉的DataItem地址：<br><img src="http://img.blog.csdn.net/20150811224427474" alt="这里写图片描述"></p>
+<p>以上三处为0的区域就是加固前的dex代码所存放的位置。<br>因此，假设我们能从dex的结构逆推出该三处的数据并且用应该的数据填充这块，静态就能把这个壳子搞定了。<br>3.如何修复</p>
+<p>360壳子要修复的数据为DataclassDef中的offset即可。而百度的更为麻烦一些，不仅它的偏移需要修复一下，更为麻烦的是DataItem的数据也要修复。这个难度就更大了。<br>总的修复原则是导出函数表，然后按顺序来修复dex中被抹掉的数据，如下：<br><img src="http://img.blog.csdn.net/20150811224456007" alt="这里写图片描述"></p>
+<p>逆计算出函数的uleb128的索引值、常见函数的一些accessflags、以及指向函数内容的offset。<br>修复后如下：<br><img src="http://img.blog.csdn.net/20150811224512558" alt="这里写图片描述"></p>
+<p>修复的过程比较繁琐，有时候还需要自己尝试几次才知道size是多少。所以叫它人肉修复好了。<br>修复好了反编译如图<br><img src="http://img.blog.csdn.net/20150811224535162" alt="这里写图片描述">：</p>
+<p>发现onCreate函数没有代码，检查了一下，又有新发现！<br><img src="http://img.blog.csdn.net/20150811224551062" alt="这里写图片描述"></p>
+<p>原来是oncreate中的insns[]也被抹掉了。这个算是最基本的单位了，功力太弱，无法逆推。</p>
+<p>最后总结下，百度的壳子需要修复dex头中的magic、签名值、校验值以及各个offset。还需要修复Dataclassoffset，以及Dataclass和opcodes。前两者是可以静态修复的，最后的只能动态调试寻找了。百度壳子新增了一个oncreate001的函数，调用的壳中的d方法以及e方法，猜测是d方法填充了insns[]解密数据，然后e方法为清洁工，抹去正确的数据或者是改成一些非法数据。此时就泪奔了。。（心里暗想：百度好猥琐啊。。。）</p>
+<p>由于过去几天了，再次写文章又重新做了一遍，把各种东西找好，写完花了将近三个小时，累觉不爱了。。。T T</p>
+<p>由于水平有限，难免有错误，还望各位看官不吝指正。<br>2015.3.24 By Ericky</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/百度-apk脱壳-逆向分析-人肉修复-百度脱壳/">百度 apk脱壳 逆向分析 人肉修复 百度脱壳</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

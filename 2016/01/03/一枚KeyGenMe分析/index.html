@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>一枚KeyGenMe分析 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="一枚KeyGenMe分析前言玩CM的人好像很少，大家都缺乏热情，小弟在此分析一枚，错误之处望各位大侠不吝指正。
+“元旦佳节，难得有闲情逸致。品一杯香茗，看IDA中的汇编代码。”虽说是迟到的祝福，但这里还是先祝各位朋友元旦快乐，愿大家的技术蒸蒸日上，身体棒，棒，棒！在逆向这条荆棘密布的道路上，难免遇到各种各样的困难，有的甚至是看似不可逾越的鸿沟。但话又说回来，其实逆向这个领域，很多技术是相通的，思维">
+  
+  <meta name="description" content="一枚KeyGenMe分析前言玩CM的人好像很少，大家都缺乏热情，小弟在此分析一枚，错误之处望各位大侠不吝指正。 “元旦佳节，难得有闲情逸致。品一杯香茗，看IDA中的汇编代码。”虽说是迟到的祝福，但这里还是先祝各位朋友元旦快乐，愿大家的技术蒸蒸日上，身体棒，棒，棒！在逆向这条荆棘密布的道路上，难免遇到各种各样的困难，有的甚至是看似不可逾越的鸿沟。但话又说回来，其实逆向这个领域，很多技术是相通的，思维">
+<meta name="keywords" content="技术 汇编 逆向 apk破解 so脱壳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一枚KeyGenMe分析">
+<meta property="og:url" content="http://yoursite.com/2016/01/03/一枚KeyGenMe分析/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="一枚KeyGenMe分析前言玩CM的人好像很少，大家都缺乏热情，小弟在此分析一枚，错误之处望各位大侠不吝指正。 “元旦佳节，难得有闲情逸致。品一杯香茗，看IDA中的汇编代码。”虽说是迟到的祝福，但这里还是先祝各位朋友元旦快乐，愿大家的技术蒸蒸日上，身体棒，棒，棒！在逆向这条荆棘密布的道路上，难免遇到各种各样的困难，有的甚至是看似不可逾越的鸿沟。但话又说回来，其实逆向这个领域，很多技术是相通的，思维">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103193830728">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103193844500">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103193854465">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103193902192">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103193935027">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103193958340">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103194010501">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103194045356">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103194057046">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103194306875">
+<meta property="og:image" content="http://img.blog.csdn.net/20160103194155690">
+<meta property="og:updated_time" content="2017-08-27T16:06:38.831Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一枚KeyGenMe分析">
+<meta name="twitter:description" content="一枚KeyGenMe分析前言玩CM的人好像很少，大家都缺乏热情，小弟在此分析一枚，错误之处望各位大侠不吝指正。 “元旦佳节，难得有闲情逸致。品一杯香茗，看IDA中的汇编代码。”虽说是迟到的祝福，但这里还是先祝各位朋友元旦快乐，愿大家的技术蒸蒸日上，身体棒，棒，棒！在逆向这条荆棘密布的道路上，难免遇到各种各样的困难，有的甚至是看似不可逾越的鸿沟。但话又说回来，其实逆向这个领域，很多技术是相通的，思维">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160103193830728">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/03/一枚KeyGenMe分析/">
+  <time datetime="2016-01-03T11:43:00.000Z">
+    2016-01-03
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">一枚KeyGenMe分析</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="一枚KeyGenMe分析"><a href="#一枚KeyGenMe分析" class="headerlink" title="一枚KeyGenMe分析"></a>一枚KeyGenMe分析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>玩CM的人好像很少，大家都缺乏热情，小弟在此分析一枚，错误之处望各位大侠不吝指正。</p>
+<p>“元旦佳节，难得有闲情逸致。品一杯香茗，看IDA中的汇编代码。”<br>虽说是迟到的祝福，但这里还是先祝各位朋友元旦快乐，愿大家的技术蒸蒸日上，身体棒，棒，棒！在逆向这条荆棘密布的道路上，难免遇到各种各样的困难，有的甚至是看似不可逾越的鸿沟。但话又说回来，其实逆向这个领域，很多技术是相通的，思维方式更是相通的。<br>网上的资料并不少，教程和文章都很多，少的就是大家对一些新问题的思考，对一些知识的灵活运用和融会贯通。</p>
+<h2 id="初探加壳so"><a href="#初探加壳so" class="headerlink" title="初探加壳so"></a>初探加壳so</h2><p>一般来说，我们从java层入手，在跟踪某一个关键函数或者一个关键变量的时候，会跟到一个native的函数里，这个时候就需要进入深邃的so。或许很多人会害怕so加壳，觉得那么遥不可及。我们来揭开加壳后so的神秘面纱，让大家对so加壳不再畏惧。<br>打开IDA定位到关键函数后：<br><img src="http://img.blog.csdn.net/20160103193830728" alt="这里写图片描述"></p>
+<p>如图，指令都被抹掉了，关键的函数完完全全被“清空”。<br>其他函数也一并被清空：<br><img src="http://img.blog.csdn.net/20160103193844500" alt="这里写图片描述"></p>
+<p>##卸下加壳so的外衣<br>尽管IDA加载的so里面的指令都被清空了，但是有一条不变的宗旨。那就是这些代码在执行之前肯定要解密的，解密的时候那就肯定在内存中，既然在内存中，我们就可以把它拿出来。<br>在关键函数段首下好断点：<br><img src="http://img.blog.csdn.net/20160103193854465" alt="这里写图片描述"></p>
+<p>IDA附加程序，出现same则点击same对话框。接下来需要让程序断在我们的断点处，代码已经解密出来了：<br><img src="http://img.blog.csdn.net/20160103193902192" alt="这里写图片描述"><br>接下来用Ctrl+S 来定位一下该so在内存中的位置，用以下IDC脚本dump出来即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">auto fp, SoAddress;</div><div class="line">fp = fopen(&quot;D:\\unpack.so&quot;, &quot;wb&quot;);</div><div class="line">for ( SoAddress=0x51F6546C; SoAddress&lt; 0x51F6B7B8; SoAddress++ )</div><div class="line">fputc(Byte(SoAddress), fp);</div></pre></td></tr></table></figure>
+<h2 id="脱壳前后对比"><a href="#脱壳前后对比" class="headerlink" title="脱壳前后对比"></a>脱壳前后对比</h2><p><img src="http://img.blog.csdn.net/20160103193935027" alt="这里写图片描述"></p>
+<p>左边为加壳后的指令，都被抹去<br>右边为脱壳后的指令，全部恢复</p>
+<p>细心的读者，肯定会发现，这和脱dex很相似，是的，这就是脱dex的方法在脱so壳上的再利用。</p>
+<h2 id="So里面遨游"><a href="#So里面遨游" class="headerlink" title="So里面遨游"></a>So里面遨游</h2><p>在check函数里面：<br><img src="http://img.blog.csdn.net/20160103193958340" alt="这里写图片描述"></p>
+<p>可以看到最后对比的字符串为：XVccAwVbVQQE<br>我们从最后开始往前推到。<br>转换成相对应的Hex如下:<br>0x58 0x56 0x63 0x63</p>
+<p>0x41 0x77 0x56 0x62</p>
+<p>0x56 0x51 0x51 0x45</p>
+<p>这些Hex的值怎么算出来的呢？继续往前看：<br>在base64encode函数中：<br><img src="http://img.blog.csdn.net/20160103194010501" alt="这里写图片描述"></p>
+<p>一共12个值，通过num2base64char函数，循环3次，每次4个值。<br>进入num2base64char函数里看算法：<br><img src="http://img.blog.csdn.net/20160103194045356" alt="这里写图片描述"></p>
+<p>贴一段转换后的java代码：<br>     public static int NumToChar(int a1){<br>         {<br>             int v2 ;<br>              if ( a1 &lt;= 0x19 ) //65到90<br>                return (a1 + 65);<br>              if ( a1 &lt;= 0x33 )//<br>                return (a1 + 71);//71到122<br>              if ( a1 &lt;= 0x3D )//61-4<br>                return (a1 - 4);<br>              v2 = 43;<br>              if ( a1 != 62 )<br>              {<br>                if ( a1 == 63 )<br>                {<br>                  v2 = 47;<br>                }<br>                else if ( a1 == 64 )<br>                {<br>                  v2 = 61;<br>                }<br>              }<br>              return v2;<br>            }<br>根据这段算法逆推出Numtochar之前的Hex为:<br>0x17 0x15 0x1c 0x1c</p>
+<p>0x00 0x30 0x15 0x1b</p>
+<p>0x15 0x10 0x10 0x04</p>
+<p>继续向前看，找出这12个Hex的值是如何来的：<br><img src="http://img.blog.csdn.net/20160103194057046" alt="这里写图片描述"><br>图中红框的函数为关键函数，进去看一下：<br><img src="http://img.blog.csdn.net/20160103194306875" alt="这里写图片描述"></p>
+<p>传入3个参数，生成了4个结果。所以之前的12个Hex的值应该是3组3位的Hex值生成的，根据算法，解密程序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">int x ,y ,z ,four1,four2,four3,four4;</div><div class="line">for(x=0;x&lt;=0xff;x++)&#123;</div><div class="line">	for(y=0;y&lt;=0xff;y++)&#123;</div><div class="line">		for(z=0;z&lt;=0xff;z++)&#123;</div><div class="line">			four1 = x&gt;&gt;2;</div><div class="line">			four2 = (16 * x &amp; 0x30) + (y &gt;&gt; 4);</div><div class="line">			four3 = (4 * y &amp; 0x3C) + (z &gt;&gt; 6);</div><div class="line">			four4 = z &amp; 0x3F;</div><div class="line">			if(four1==0x15 &amp;&amp; four2==0x10 &amp;&amp;  four3==0x10 &amp;&amp; four4==0x04)&#123;</div><div class="line">				System.out.println(&quot;X:0x&quot;+Integer.toHexString(x)+&quot; Y:0x&quot;+Integer.toHexString(y)+&quot; Z:0x&quot;+Integer.toHexString(z));</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>得出3组3位的Hex值如下：<br>0x5d 0x57 0x1c<br>0x03 0x05 0x5b<br>0x55 0x04 0x04<br>再往前就是java层了：只要传入的字符串为以下Hex则成功：<br>16进制：5d 57 1c 03 05 5b 55 04 04</p>
+<pre><code> | |
+| |
+</code></pre><hr>
+<p>   \  /<br>      \/</p>
+<p>  JAVA层<br>JAVA层的加密函数为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">public static String Encrpt(String arg9, String arg10) &#123;</div><div class="line">        String v0_2;</div><div class="line">        String v1 = null;</div><div class="line">        if(arg9 != null &amp;&amp; arg10 != null) &#123;</div><div class="line">            try &#123;</div><div class="line">                char[] v2 = arg10.toCharArray();</div><div class="line">                char[] v3 = arg9.toCharArray();</div><div class="line">                int v4 = v3.length; //v4 =9</div><div class="line">                int v5 = v2.length;</div><div class="line">                char[] v6 = new char[v4];</div><div class="line">                int v0_1;</div><div class="line">                for(v0_1 = 0; v0_1 &lt; v4; ++v0_1) &#123;</div><div class="line">                	System.out.println((int)(v3[v0_1])+&quot; ^ &quot;+(int)v2[v0_1 % v5]);</div><div class="line">                    v6[v0_1] = ((char)(v3[v0_1] ^ v2[v0_1 % v5]));</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                v0_2 = new String(v6);</div><div class="line">            &#125;</div><div class="line">            catch(Exception v0) &#123;</div><div class="line">                v0.printStackTrace();</div><div class="line">                v0_2 = v1;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        else &#123;</div><div class="line">            v0_2 = v1;</div><div class="line">        &#125;</div><div class="line">        return v0_2;</div><div class="line">    &#125;</div><div class="line">	public static String toHexString(String s) &#123;</div><div class="line">		String str = &quot;&quot;;</div><div class="line">		for (int i = 0; i &lt; s.length(); i++) &#123;</div><div class="line">			int ch = (int) s.charAt(i);</div><div class="line">			String s4 = Integer.toHexString(ch);</div><div class="line">			System.out.println((i+1)+&quot;: 0x&quot;+s4);</div><div class="line">			str = str + s4;</div><div class="line">		&#125;</div><div class="line">		return str;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>运算都是异或加密，逆运算就是结果与key再异或回来，而key在Java层已经可以知道，为”52pojie”,所以异或回来的答案如下：<br>Answer:104 101 108 108 111 50 48 49 54</p>
+<p>最后再查一下ASCII码表得出答案为：hello2016<br>验证一下：</p>
+<p><img src="http://img.blog.csdn.net/20160103194155690" alt="这里写图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>希望通过对这篇文章阅读，你已经对so不再恐惧了。再次祝大家2016年有新的收获！</p>
+<p>2016年元旦</p>
+<p> By Ericky </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/技术-汇编-逆向-apk破解-so脱壳/">技术 汇编 逆向 apk破解 so脱壳</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

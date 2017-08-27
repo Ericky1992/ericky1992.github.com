@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>看雪CTF 2017 第六题设计思路和解题思路 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="这道题主要需要花时间搞清楚套路，就迎刃而解了。^_^ 
+1.java层稍作字符串加密和类名方法名混淆处理(本来是打算java层也做点文章的@_@)解题：通过阅读代码，可以知道check函数为关键函数，当返回为真的时候，注册成功。
+2.so层用花指令对程序指令进行混淆，在一定程度上防止分析。
+解题：编写去花指令脚本，F5就会变得很简单。去花后check函数如下：
+这样就能很清楚看到注册过程了，第一个">
+  
+  <meta name="description" content="这道题主要需要花时间搞清楚套路，就迎刃而解了。^_^  1.java层稍作字符串加密和类名方法名混淆处理(本来是打算java层也做点文章的@_@)解题：通过阅读代码，可以知道check函数为关键函数，当返回为真的时候，注册成功。 2.so层用花指令对程序指令进行混淆，在一定程度上防止分析。 解题：编写去花指令脚本，F5就会变得很简单。去花后check函数如下： 这样就能很清楚看到注册过程了，第一个">
+<meta name="keywords" content="CTF 看雪 逆向 花指令 apk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="看雪CTF 2017 第六题设计思路和解题思路">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/看雪CTF 2017 第六题设计思路和解题思路/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="这道题主要需要花时间搞清楚套路，就迎刃而解了。^_^  1.java层稍作字符串加密和类名方法名混淆处理(本来是打算java层也做点文章的@_@)解题：通过阅读代码，可以知道check函数为关键函数，当返回为真的时候，注册成功。 2.so层用花指令对程序指令进行混淆，在一定程度上防止分析。 解题：编写去花指令脚本，F5就会变得很简单。去花后check函数如下： 这样就能很清楚看到注册过程了，第一个">
+<meta property="og:image" content="http://img.blog.csdn.net/20170614213843087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170614213921432?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170614213941745?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-27T15:43:13.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="看雪CTF 2017 第六题设计思路和解题思路">
+<meta name="twitter:description" content="这道题主要需要花时间搞清楚套路，就迎刃而解了。^_^  1.java层稍作字符串加密和类名方法名混淆处理(本来是打算java层也做点文章的@_@)解题：通过阅读代码，可以知道check函数为关键函数，当返回为真的时候，注册成功。 2.so层用花指令对程序指令进行混淆，在一定程度上防止分析。 解题：编写去花指令脚本，F5就会变得很简单。去花后check函数如下： 这样就能很清楚看到注册过程了，第一个">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170614213843087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2017/06/14/看雪CTF 2017 第六题设计思路和解题思路/">
+  <time datetime="2017-06-14T13:41:08.000Z">
+    2017-06-14
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">看雪CTF 2017 第六题设计思路和解题思路</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>这道题主要需要花时间搞清楚套路，就迎刃而解了。^_^ </p>
+<h3 id="1-java层稍作字符串加密和类名方法名混淆处理-本来是打算java层也做点文章的"><a href="#1-java层稍作字符串加密和类名方法名混淆处理-本来是打算java层也做点文章的" class="headerlink" title="1.java层稍作字符串加密和类名方法名混淆处理(本来是打算java层也做点文章的@_@)"></a>1.java层稍作字符串加密和类名方法名混淆处理(本来是打算java层也做点文章的@_@)</h3><p><img src="http://img.blog.csdn.net/20170614213843087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解题：通过阅读代码，可以知道check函数为关键函数，当返回为真的时候，注册成功。</p>
+<h3 id="2-so层用花指令对程序指令进行混淆，在一定程度上防止分析。"><a href="#2-so层用花指令对程序指令进行混淆，在一定程度上防止分析。" class="headerlink" title="2.so层用花指令对程序指令进行混淆，在一定程度上防止分析。"></a>2.so层用花指令对程序指令进行混淆，在一定程度上防止分析。</h3><p><img src="http://img.blog.csdn.net/20170614213921432?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>解题：编写去花指令脚本，F5就会变得很简单。去花后check函数如下：<br><img src="http://img.blog.csdn.net/20170614213941745?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这样就能很清楚看到注册过程了，第一个while循环释放存放好的字符串到byte_20020。sub_19DA8为加密函数，返回结果到v14，最后v14与byte_20020做比较，一样就行了。算法采用了RC4加密+base64编码。</p>
+<h3 id="3-值得一提的是，so中藏关键字符串数据的方式我自己觉得挺有意思的。不知道聪明的你有没有发现呢？如果不会去花也不要紧，还有一个解题的思路就是是找到最后的汇编cmp，下好断点，因为这个算法的缘故。java层可以遍历传入字符串进行遍历暴力破解。"><a href="#3-值得一提的是，so中藏关键字符串数据的方式我自己觉得挺有意思的。不知道聪明的你有没有发现呢？如果不会去花也不要紧，还有一个解题的思路就是是找到最后的汇编cmp，下好断点，因为这个算法的缘故。java层可以遍历传入字符串进行遍历暴力破解。" class="headerlink" title="3.值得一提的是，so中藏关键字符串数据的方式我自己觉得挺有意思的。不知道聪明的你有没有发现呢？如果不会去花也不要紧，还有一个解题的思路就是是找到最后的汇编cmp，下好断点，因为这个算法的缘故。java层可以遍历传入字符串进行遍历暴力破解。"></a>3.值得一提的是，so中藏关键字符串数据的方式我自己觉得挺有意思的。不知道聪明的你有没有发现呢？如果不会去花也不要紧，还有一个解题的思路就是是找到最后的汇编cmp，下好断点，因为这个算法的缘故。java层可以遍历传入字符串进行遍历暴力破解。</h3><h3 id="4-总结一下，我自己想到了两个解题方式，一个暴力解题，一个去花解题。从男人刚正面的角度来讲，这道题主要就是考去花，没有加其他的东西了，直接被大佬们秒得体无完肤。。。先行膜拜。最后附上答案：madebyericky94528"><a href="#4-总结一下，我自己想到了两个解题方式，一个暴力解题，一个去花解题。从男人刚正面的角度来讲，这道题主要就是考去花，没有加其他的东西了，直接被大佬们秒得体无完肤。。。先行膜拜。最后附上答案：madebyericky94528" class="headerlink" title="4.总结一下，我自己想到了两个解题方式，一个暴力解题，一个去花解题。从男人刚正面的角度来讲，这道题主要就是考去花，没有加其他的东西了，直接被大佬们秒得体无完肤。。。先行膜拜。最后附上答案：madebyericky94528"></a>4.总结一下，我自己想到了两个解题方式，一个暴力解题，一个去花解题。从男人刚正面的角度来讲，这道题主要就是考去花，没有加其他的东西了，直接被大佬们秒得体无完肤。。。先行膜拜。最后附上答案：madebyericky94528</h3>
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/CTF-看雪-逆向-花指令-apk/">CTF 看雪 逆向 花指令 apk</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

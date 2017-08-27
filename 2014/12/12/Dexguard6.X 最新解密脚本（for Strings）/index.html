@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Dexguard6.X 最新解密脚本（for Strings） | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="0x1 写这篇文字的目的：1、有一些人加我询问脚本的含义，这里都基本给了解答。2、取之看雪，还之看雪。算是一种感恩吧。菜鸟一枚，难免有错误冗长之处，失敬之处还望各位大侠多多包涵。
+0x2 用法:打开脚本文件第一处：
+这里自己增加一些逻辑运算或者算数运算。之所以要这样，是因为JEB的包目前还不是很完善，具体的可以跟着代码到http://www.Android-decompiler.com/apido">
+  
+  <meta name="description" content="0x1 写这篇文字的目的：1、有一些人加我询问脚本的含义，这里都基本给了解答。2、取之看雪，还之看雪。算是一种感恩吧。菜鸟一枚，难免有错误冗长之处，失敬之处还望各位大侠多多包涵。 0x2 用法:打开脚本文件第一处： 这里自己增加一些逻辑运算或者算数运算。之所以要这样，是因为JEB的包目前还不是很完善，具体的可以跟着代码到http://www.Android-decompiler.com/apido">
+<meta name="keywords" content="apk解密 破解 反编译 DexGuard">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dexguard6.X 最新解密脚本（for Strings）">
+<meta property="og:url" content="http://yoursite.com/2014/12/12/Dexguard6.X 最新解密脚本（for Strings）/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="0x1 写这篇文字的目的：1、有一些人加我询问脚本的含义，这里都基本给了解答。2、取之看雪，还之看雪。算是一种感恩吧。菜鸟一枚，难免有错误冗长之处，失敬之处还望各位大侠多多包涵。 0x2 用法:打开脚本文件第一处： 这里自己增加一些逻辑运算或者算数运算。之所以要这样，是因为JEB的包目前还不是很完善，具体的可以跟着代码到http://www.Android-decompiler.com/apido">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324150638069?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324150646670?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324150653191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324150700102?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324150741561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324150714813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-27T16:43:23.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dexguard6.X 最新解密脚本（for Strings）">
+<meta name="twitter:description" content="0x1 写这篇文字的目的：1、有一些人加我询问脚本的含义，这里都基本给了解答。2、取之看雪，还之看雪。算是一种感恩吧。菜鸟一枚，难免有错误冗长之处，失敬之处还望各位大侠多多包涵。 0x2 用法:打开脚本文件第一处： 这里自己增加一些逻辑运算或者算数运算。之所以要这样，是因为JEB的包目前还不是很完善，具体的可以跟着代码到http://www.Android-decompiler.com/apido">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150324150638069?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/12/Dexguard6.X 最新解密脚本（for Strings）/">
+  <time datetime="2014-12-12T07:06:08.000Z">
+    2014-12-12
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Dexguard6.X 最新解密脚本（for Strings）</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="0x1-写这篇文字的目的："><a href="#0x1-写这篇文字的目的：" class="headerlink" title="0x1 写这篇文字的目的："></a>0x1 写这篇文字的目的：</h2><p>1、有一些人加我询问脚本的含义，这里都基本给了解答。<br>2、取之看雪，还之看雪。算是一种感恩吧。<br>菜鸟一枚，难免有错误冗长之处，失敬之处还望各位大侠多多包涵。</p>
+<h2 id="0x2-用法"><a href="#0x2-用法" class="headerlink" title="0x2 用法:"></a>0x2 用法:</h2><p>打开脚本文件第一处：<br><img src="http://img.blog.csdn.net/20150324150638069?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里自己增加一些逻辑运算或者算数运算。之所以要这样，是因为JEB的包目前还不是很完善，具体的可以跟着代码到<a href="http://www.Android-decompiler.com/apidoc/" target="_blank" rel="external">http://www.Android-decompiler.com/apidoc/</a> 去看看，如果有更好的方法，也记得告诉我一声哦。<br>打开脚本文件第二处：<br><img src="http://img.blog.csdn.net/20150324150646670?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>这里更改成对于的加密字符串即可。<br>打开脚本文件第三处：<br><img src="http://img.blog.csdn.net/20150324150653191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>这个函数里是针对你所要解密的函数中不同形式参数的逻辑判断，例如：</p>
+<p>Call（arg1，arg2，arg3） 这种是早期的Dexguard的字符串解密函数调用形式</p>
+<p>Call （arg1+Const，arg2，arg3[XX]）类似这种的在6.0较为普遍，同时又很多变种<br>打开脚本文件第四处：<br><img src="http://img.blog.csdn.net/20150324150700102?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>这里是依据你的实际情况，写好你实际的解密逻辑和运算。（我 这里的提供的代码可以用于6.0）</p>
+<h2 id="0x3-效果对比"><a href="#0x3-效果对比" class="headerlink" title="0x3 效果对比"></a>0x3 效果对比</h2><p>解密之前：<br><img src="http://img.blog.csdn.net/20150324150741561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>解密之后：<br><img src="http://img.blog.csdn.net/20150324150714813?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>当然由于水平有限，会有少量bug，发现了bug请及时和我联系，我一定马上修改。</p>
+<p>如果你觉得这篇文字很突然，你可以先看看 <a href="http://bbs.pediy.com/showthread.PHP?t=195423" target="_blank" rel="external">http://bbs.pediy.com/showthread.PHP?t=195423</a><br>如果还觉得突然，可以看看<a href="http://bbs.pediy.com/showthread.php?t=195202" target="_blank" rel="external">http://bbs.pediy.com/showthread.php?t=195202</a><br>如果还觉得突然，那你就应该去看那本白皮书了。<br>最后， 周五了，希望大家都能过一个轻松而愉快的周末！<br>这里是脚本下载：A script.zip.<br>By Ericky<br>2014.12.12 </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/apk解密-破解-反编译-DexGuard/">apk解密 破解 反编译 DexGuard</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

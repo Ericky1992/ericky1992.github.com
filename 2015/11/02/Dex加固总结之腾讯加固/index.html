@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Dex加固总结之腾讯加固 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Ericky1992">
+  
+  
+    <meta name="description" content="Dex加固总结之腾讯加固【作者声明】：只是感兴趣，没有其他目的。失误之处敬请诸位大侠赐教！
+由于dex脱壳的文章很多，讲原理的文章也到处都是，所以我就不抛砖头误导大家了。快到2016年了，时隔一年，来总结一下这些加固厂商的手法。
+1.加固前后文件对比，左边为原包
+2.脱壳后类名结构tencent.StubShell主要是用来执行腾讯的逻辑代码。
+3.使得反编译工具失败插入一个A001类，导致反编译">
+  
+  <meta name="description" content="Dex加固总结之腾讯加固【作者声明】：只是感兴趣，没有其他目的。失误之处敬请诸位大侠赐教！ 由于dex脱壳的文章很多，讲原理的文章也到处都是，所以我就不抛砖头误导大家了。快到2016年了，时隔一年，来总结一下这些加固厂商的手法。 1.加固前后文件对比，左边为原包 2.脱壳后类名结构tencent.StubShell主要是用来执行腾讯的逻辑代码。 3.使得反编译工具失败插入一个A001类，导致反编译">
+<meta name="keywords" content="反编译工具 反编译代码 Dex加固 APP加固">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dex加固总结之腾讯加固">
+<meta property="og:url" content="http://yoursite.com/2015/11/02/Dex加固总结之腾讯加固/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="Dex加固总结之腾讯加固【作者声明】：只是感兴趣，没有其他目的。失误之处敬请诸位大侠赐教！ 由于dex脱壳的文章很多，讲原理的文章也到处都是，所以我就不抛砖头误导大家了。快到2016年了，时隔一年，来总结一下这些加固厂商的手法。 1.加固前后文件对比，左边为原包 2.脱壳后类名结构tencent.StubShell主要是用来执行腾讯的逻辑代码。 3.使得反编译工具失败插入一个A001类，导致反编译">
+<meta property="og:image" content="http://img.blog.csdn.net/20151102155103307">
+<meta property="og:image" content="http://img.blog.csdn.net/20151102155125074">
+<meta property="og:image" content="http://img.blog.csdn.net/20151102155132941">
+<meta property="og:image" content="http://img.blog.csdn.net/20151102155143614">
+<meta property="og:updated_time" content="2017-08-27T16:13:41.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dex加固总结之腾讯加固">
+<meta name="twitter:description" content="Dex加固总结之腾讯加固【作者声明】：只是感兴趣，没有其他目的。失误之处敬请诸位大侠赐教！ 由于dex脱壳的文章很多，讲原理的文章也到处都是，所以我就不抛砖头误导大家了。快到2016年了，时隔一年，来总结一下这些加固厂商的手法。 1.加固前后文件对比，左边为原包 2.脱壳后类名结构tencent.StubShell主要是用来执行腾讯的逻辑代码。 3.使得反编译工具失败插入一个A001类，导致反编译">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151102155103307">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/11/02/Dex加固总结之腾讯加固/">
+  <time datetime="2015-11-02T08:01:00.000Z">
+    2015-11-02
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Dex加固总结之腾讯加固</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="Dex加固总结之腾讯加固"><a href="#Dex加固总结之腾讯加固" class="headerlink" title="Dex加固总结之腾讯加固"></a>Dex加固总结之腾讯加固</h2><p>【作者声明】：只是感兴趣，没有其他目的。失误之处敬请诸位大侠赐教！</p>
+<p>由于dex脱壳的文章很多，讲原理的文章也到处都是，所以我就不抛砖头误导大家了。快到2016年了，时隔一年，来总结一下这些加固厂商的手法。</p>
+<h3 id="1-加固前后文件对比，左边为原包"><a href="#1-加固前后文件对比，左边为原包" class="headerlink" title="1.加固前后文件对比，左边为原包"></a>1.加固前后文件对比，左边为原包</h3><p><img src="http://img.blog.csdn.net/20151102155103307" alt="这里写图片描述"></p>
+<h3 id="2-脱壳后类名结构"><a href="#2-脱壳后类名结构" class="headerlink" title="2.脱壳后类名结构"></a>2.脱壳后类名结构</h3><p><img src="http://img.blog.csdn.net/20151102155125074" alt="这里写图片描述"><br>tencent.StubShell主要是用来执行腾讯的逻辑代码。</p>
+<h3 id="3-使得反编译工具失败"><a href="#3-使得反编译工具失败" class="headerlink" title="3.使得反编译工具失败"></a>3.使得反编译工具失败</h3><p>插入一个A001类，导致反编译Smali失败<br><img src="http://img.blog.csdn.net/20151102155132941" alt="这里写图片描述"><br>                                    图一<br><img src="http://img.blog.csdn.net/20151102155143614" alt="这里写图片描述"><br>                                    图二<br>能看到这些的话，腾讯App加固脱壳就完成了。</p>
+<p>Game Over<br>―――――――――――――――――――――――――――――――――<br>2015.11.02<br>By Ericky      </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/反编译工具-反编译代码-Dex加固-APP加固/">反编译工具 反编译代码 Dex加固 APP加固</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">Ericky1992</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
