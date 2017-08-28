@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>写一个简单程序解析ELF | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="The darkness is no darkness with thee.">
+  
+  
+    <meta name="description" content="最近学习elf文件格式，感觉写一个程序会更印象深刻，牢固。于是便开工，程序很简单，写了3个part的，包括ELF_header，P_Header&amp;amp;Section_Header，目前对ELF格式是很熟悉了，基本目的达到了。然后在写的过程中拿了一本elf的手册以及非虫的android elf格式附图。过程中发现了图中的两处错误，.interp段多框了一个字节，另外section name st">
+  
+  <meta name="description" content="最近学习elf文件格式，感觉写一个程序会更印象深刻，牢固。于是便开工，程序很简单，写了3个part的，包括ELF_header，P_Header&amp;amp;Section_Header，目前对ELF格式是很熟悉了，基本目的达到了。然后在写的过程中拿了一本elf的手册以及非虫的android elf格式附图。过程中发现了图中的两处错误，.interp段多框了一个字节，另外section name st">
+<meta name="keywords" content="安卓 安全 apk 应用程序 vc++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写一个简单程序解析ELF">
+<meta property="og:url" content="http://yoursite.com/2014/12/29/写一个简单程序解析ELF/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="最近学习elf文件格式，感觉写一个程序会更印象深刻，牢固。于是便开工，程序很简单，写了3个part的，包括ELF_header，P_Header&amp;amp;Section_Header，目前对ELF格式是很熟悉了，基本目的达到了。然后在写的过程中拿了一本elf的手册以及非虫的android elf格式附图。过程中发现了图中的两处错误，.interp段多框了一个字节，另外section name st">
+<meta property="og:image" content="http://img.blog.csdn.net/20150304154059144?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-28T13:04:40.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="写一个简单程序解析ELF">
+<meta name="twitter:description" content="最近学习elf文件格式，感觉写一个程序会更印象深刻，牢固。于是便开工，程序很简单，写了3个part的，包括ELF_header，P_Header&amp;amp;Section_Header，目前对ELF格式是很熟悉了，基本目的达到了。然后在写的过程中拿了一本elf的手册以及非虫的android elf格式附图。过程中发现了图中的两处错误，.interp段多框了一个字节，另外section name st">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150304154059144?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/29/写一个简单程序解析ELF/">
+  <time datetime="2014-12-29T07:39:00.000Z">
+    2014-12-29
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">写一个简单程序解析ELF</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>最近学习elf文件格式，感觉写一个程序会更印象深刻，牢固。于是便开工，程序很简单，写了3个part的，包括ELF_header，P_Header&amp;Section_Header，目前对ELF格式是很熟悉了，基本目的达到了。然后在写的过程中拿了一本elf的手册以及非虫的android elf格式附图。过程中发现了图中的两处错误，.interp段多框了一个字节，另外section name string table的偏移计算错了一个字节。<br>感觉这个时间点才学ELF主要是自娱自乐了。<br>不过还是要贴张图，也还是有成就感:<br><img src="http://img.blog.csdn.net/20150304154059144?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>附上源码，有想完善的就拿去吧，做一个Win下的readelf也是很nice的。</p>
+<p>最后元旦快到了，那就祝大家度过一个心情无比开心，技术爆炸增长的元旦吧！<br>By Ericky<br>2014.12.29<br>源码见我上传的资源下载</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/安卓-安全-apk-应用程序-vc/">安卓 安全 apk 应用程序 vc++</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">The darkness is no darkness with thee.</a>
+  
+</div>
+<div class="theme-copyright">
+
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

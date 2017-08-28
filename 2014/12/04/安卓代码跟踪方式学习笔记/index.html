@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>安卓代码跟踪方式学习笔记 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="The darkness is no darkness with thee.">
+  
+  
+    <meta name="description" content="分享一下学习过程中的心得，主要献给和我一样起步晚又对安卓产生浓烈兴趣的童鞋们！
+一、代码跟踪的介绍&amp;amp;使用工具代码跟踪常用于调试程序中，跟踪并了解程序的执行轨迹和执行逻辑。这样来说，对Java这样的高级语言来说，我们容易理解也容易调试。但是像一些低级语言，例如ASM、Smali来说难度就很大了，因为反汇编这样的语言，我们需要一次性记住很多乱七八糟的关键词才能成功，因而代码跟踪的技术就诞生了，">
+  
+  <meta name="description" content="分享一下学习过程中的心得，主要献给和我一样起步晚又对安卓产生浓烈兴趣的童鞋们！ 一、代码跟踪的介绍&amp;amp;使用工具代码跟踪常用于调试程序中，跟踪并了解程序的执行轨迹和执行逻辑。这样来说，对Java这样的高级语言来说，我们容易理解也容易调试。但是像一些低级语言，例如ASM、Smali来说难度就很大了，因为反汇编这样的语言，我们需要一次性记住很多乱七八糟的关键词才能成功，因而代码跟踪的技术就诞生了，">
+<meta name="keywords" content="安全 安卓 apk反编译 代码分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓代码跟踪方式学习笔记">
+<meta property="og:url" content="http://yoursite.com/2014/12/04/安卓代码跟踪方式学习笔记/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="分享一下学习过程中的心得，主要献给和我一样起步晚又对安卓产生浓烈兴趣的童鞋们！ 一、代码跟踪的介绍&amp;amp;使用工具代码跟踪常用于调试程序中，跟踪并了解程序的执行轨迹和执行逻辑。这样来说，对Java这样的高级语言来说，我们容易理解也容易调试。但是像一些低级语言，例如ASM、Smali来说难度就很大了，因为反汇编这样的语言，我们需要一次性记住很多乱七八糟的关键词才能成功，因而代码跟踪的技术就诞生了，">
+<meta property="og:image" content="http://img.blog.csdn.net/20150320162959238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-28T13:01:07.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓代码跟踪方式学习笔记">
+<meta name="twitter:description" content="分享一下学习过程中的心得，主要献给和我一样起步晚又对安卓产生浓烈兴趣的童鞋们！ 一、代码跟踪的介绍&amp;amp;使用工具代码跟踪常用于调试程序中，跟踪并了解程序的执行轨迹和执行逻辑。这样来说，对Java这样的高级语言来说，我们容易理解也容易调试。但是像一些低级语言，例如ASM、Smali来说难度就很大了，因为反汇编这样的语言，我们需要一次性记住很多乱七八糟的关键词才能成功，因而代码跟踪的技术就诞生了，">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150320162959238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/04/安卓代码跟踪方式学习笔记/">
+  <time datetime="2014-12-04T08:29:43.000Z">
+    2014-12-04
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">安卓代码跟踪方式学习笔记</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>分享一下学习过程中的心得，主要献给和我一样起步晚又对安卓产生浓烈兴趣的童鞋们！</p>
+<h2 id="一、代码跟踪的介绍-amp-使用工具"><a href="#一、代码跟踪的介绍-amp-使用工具" class="headerlink" title="一、代码跟踪的介绍&amp;使用工具"></a>一、代码跟踪的介绍&amp;使用工具</h2><p>代码跟踪常用于调试程序中，跟踪并了解程序的执行轨迹和执行逻辑。这样来说，对Java这样的高级语言来说，我们容易理解也容易调试。但是像一些低级语言，例如ASM、Smali来说难度就很大了，因为反汇编这样的语言，我们需要一次性记住很多乱七八糟的关键词才能成功，因而代码跟踪的技术就诞生了，并且在一些大程序中的运用更为广泛，同时也是现在逆向一些大而复杂的Android-app极为重要的一种手段。<br>相信很多人都玩过PC端，对OD的动态调试也应该特别熟悉。OD很强大，其中的F2（断点），F8（单步走）使得调试程序事半功倍，我相信用过得没有说不好的吧。而android-app与PC software的性质是不同的。在Android-app里是把Apk文件Dump成字节码，分析，修改，再重新编译。有一个很大的不同点就是Android-app但是正是由于开源，使得Dump出来的字节码是“死”的，这是Java的一个特性。幸运的是，Apktool很好的解决了这个问题，它的出现使得Android-app的调试得到了转机，受益的是大家。<br>既然不能进行完全的调试，想到的办法是用系统的log函数来呈现程序运行到关键时候的关键信息来达到相应的效果。比如说，你想知道程序运行到某个时候某个变量里装的是什么，就可以用log的方式显示。<br>获取Android程序的log信息一共有几种方式。最好的选择当时是用DDMS,因为它和Android SDK是一伙的！它可以显示很多系统的log信息以及一些其他的乱七八糟的信息。同时，可以设置过滤器来进行标签过滤、log等级（error，warning，info，debug，verbose）过滤、进程过滤，也能结束进程。相当强大。如图：<br><img src="http://img.blog.csdn.net/20150320162959238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="二、跟踪方法"><a href="#二、跟踪方法" class="headerlink" title="二、跟踪方法"></a>二、跟踪方法</h2><h3 id="1-Logging大法"><a href="#1-Logging大法" class="headerlink" title="1.Logging大法"></a>1.Logging大法</h3><p>因为Apps没有控制台所以它们只能通过Android 的API中的log函数来进行输出。<br>关于android/util/Log的介绍如下：<br>Log extends Object<br>一共有5个方法：Log.v() Log.d() Log.i()Log.w() and Log.e()，它们分别对应：<br>int<br>ASSERT<br>Priority constant for the println method.<br>int<br>DEBUG<br>Priority constant for the println method; use Log.d.<br>int<br>ERROR<br>Priority constant for the println method; use Log.e.<br>int<br>INFO<br>Priority constant for the println method; use Log.i.<br>int<br>VERBOSE<br>Priority constant for the println method; use Log.v.<br>int<br>WARN<br>Priority constant for the println method; use Log.w<br>Log.d一般来说是用的最多的。（本来log.v是最多的，但是log.v并不参加编译）<br>写一个测试类来分析Java代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public class Log &#123;  </div><div class="line">    public Log() &#123;&#125;  </div><div class="line">      </div><div class="line">    public static void Log(String msg)  </div><div class="line">    &#123;  </div><div class="line">        Log(msg, &quot;Log&quot;);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    public static void Log(Object XX)  </div><div class="line">    &#123;  </div><div class="line">        Log(&quot;Log&quot;, XX.toString());  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    public static void Log(Object XX, String tag)  </div><div class="line">    &#123;  </div><div class="line">        Log(tag, XX.toString());  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    public static void Log(String tag, String msg)  </div><div class="line">    &#123;  </div><div class="line">        Log.d(tag, msg);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    public static void ToastLog(Context contx, String msg, int duration)  </div><div class="line">    &#123;  </div><div class="line">        Toast.makeText(contx, msg, duration).show();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>反汇编成Smali代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line"># direct methods  </div><div class="line">.method public constructor &lt;init&gt;()V  </div><div class="line">    .registers 1  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 8  </div><div class="line">    invoke-direct &#123;p0&#125;, Ljava/lang/Object;-&gt;&lt;init&gt;()V  </div><div class="line">  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">  </div><div class="line">.method public static Log(Ljava/lang/Object;)V  </div><div class="line">    .registers 3  </div><div class="line">    .parameter &quot;XX&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 17  </div><div class="line">    const-string v0, &quot;Log&quot;  </div><div class="line">  </div><div class="line">    invoke-virtual &#123;p0&#125;, Ljava/lang/Object;-&gt;toString()Ljava/lang/String;  </div><div class="line">  </div><div class="line">    move-result-object v1  </div><div class="line">  </div><div class="line">    invoke-static &#123;v0, v1&#125;, Lcom/Ericky/Log;-&gt;Log(Ljava/lang/String;Ljava/lang/String;)V  </div><div class="line">  </div><div class="line">    .line 18  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">  </div><div class="line">.method public static Log(Ljava/lang/Object;Ljava/lang/String;)V  </div><div class="line">    .registers 3  </div><div class="line">    .parameter &quot;XX&quot;  </div><div class="line">    .parameter &quot;tag&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 22  </div><div class="line">    invoke-virtual &#123;p0&#125;, Ljava/lang/Object;-&gt;toString()Ljava/lang/String;  </div><div class="line">  </div><div class="line">    move-result-object v0  </div><div class="line">  </div><div class="line">    invoke-static &#123;p1, v0&#125;, Lcom/Ericky/Log;-&gt;Log(Ljava/lang/String;Ljava/lang/String;)V  </div><div class="line">  </div><div class="line">    .line 23  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">  </div><div class="line">.method public static Log(Ljava/lang/String;)V  </div><div class="line">    .registers 2  </div><div class="line">    .parameter &quot;msg&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 12  </div><div class="line">    const-string v0, &quot;Log&quot;  </div><div class="line">  </div><div class="line">    invoke-static &#123;v0, p0&#125;, Lcom/Ericky/Log;-&gt;Log(Ljava/lang/String;Ljava/lang/String;)V  </div><div class="line">  </div><div class="line">    .line 13  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">  </div><div class="line">.method public static Log(Ljava/lang/String;Ljava/lang/String;)V  </div><div class="line">    .registers 2  </div><div class="line">    .parameter &quot;tag&quot;  </div><div class="line">    .parameter &quot;msg&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 28  </div><div class="line">    invoke-static &#123;p0, p1&#125;, Landroid/util/Log;-&gt;d(Ljava/lang/String;Ljava/lang/String;)I  </div><div class="line">  </div><div class="line">    .line 29  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">  </div><div class="line">.method public static ToastLog(Landroid/content/Context;Ljava/lang/String;)V  </div><div class="line">    .registers 3  </div><div class="line">    .parameter &quot;contx&quot;  </div><div class="line">    .parameter &quot;msg&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 33  </div><div class="line">    const/4 v0, 0x5  </div><div class="line">  </div><div class="line">    invoke-static &#123;p0, p1, v0&#125;, Lcom/Ericky/Log;-&gt;ToastLog(Landroid/content/Context;Ljava/lang/String;I)V  </div><div class="line">  </div><div class="line">    .line 34  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">  </div><div class="line">.method public static ToastLog(Landroid/content/Context;Ljava/lang/String;I)V  </div><div class="line">    .registers 4  </div><div class="line">    .parameter &quot;contx&quot;  </div><div class="line">    .parameter &quot;msg&quot;  </div><div class="line">    .parameter &quot;duration&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 40  </div><div class="line">    invoke-virtual &#123;p0&#125;, Landroid/content/Context;-&gt;getApplicationContext()Landroid/content/Context;  </div><div class="line">  </div><div class="line">    .line 41  </div><div class="line">    invoke-static &#123;p0, p1, p2&#125;, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;  </div><div class="line">  </div><div class="line">    move-result-object v0  </div><div class="line">  </div><div class="line">    invoke-virtual &#123;v0&#125;, Landroid/widget/Toast;-&gt;show()V  </div><div class="line">  </div><div class="line">    .line 42  </div><div class="line">    return-void  </div><div class="line">.end method</div></pre></td></tr></table></figure></p>
+<p>取出第一个方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">.method public static Log(Ljava/lang/Object;)V  </div><div class="line">    .registers 3  </div><div class="line">.parameter &quot;XX&quot;  </div><div class="line">  </div><div class="line">    .prologue  </div><div class="line">    .line 17  </div><div class="line">    const-string v0, &quot;Log&quot;  </div><div class="line">  </div><div class="line">    invoke-virtual &#123;p0&#125;, Ljava/lang/Object;-&gt;toString()Ljava/lang/String;  </div><div class="line">  </div><div class="line">    move-result-object v1  </div><div class="line">  </div><div class="line">    invoke-static &#123;v0, v1&#125;, Lcom/Ericky/Log;-&gt;Log(Ljava/lang/String;Ljava/lang/String;)V  </div><div class="line">  </div><div class="line">    .line 18  </div><div class="line">    return-void  </div><div class="line">.end method</div></pre></td></tr></table></figure></p>
+<p>在这个方法里的第一个参数就是标签，在DDMS中是可以过滤的。因此，可以利用这个特点插入我们要加的信息，从而轻松的定位到关键的地方。在实际操作的过程中，可以打开androidAPI的文档，对着看。通常的做法是用Log.d，还要用到toString（）这个API，同时需要2个变量，一个变量存放你的标签以及另一个存放你的对象。值得注意的是，即使你根本不用这个2个变量，也需要将.locals和.registers的数量增加。修改完了之后记得检查好代码，至少我们自己能读懂它。<br>还有一点需要我们注意，当你改完之后最好在根目录下运行，否则记得还要改class的路径。不然的话有可能出现ClassDefNotFound错误，程序强制退出。下面是修改的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const-string v0, &quot;Ericky tag&quot;  </div><div class="line">const-string v1, &quot;important log message&quot;  </div><div class="line">invoke-static &#123;v0, v1&#125;, Lcom/Ericky/Log;-&gt;Log(Ljava/lang/String;Ljava/lang/String;)V</div></pre></td></tr></table></figure>
+<p>这是一个简单的例子，但是有的时候我们是需要显示更多的字符串，那我们应该怎么办呢？需要用到一个StringBuilder类。StringBuilder类的用法在我之前的一篇文章中已经有用到了，很容易理解。<a href="http://bbs.pediy.com/showthread.php?t=194955" target="_blank" rel="external">http://bbs.pediy.com/showthread.php?t=194955</a><br>还有一个方法就是大家搜集一些没有加密的app的smali源码，这就是我们自己的图书馆啊！谁用谁知道！</p>
+<h3 id="2-栈跟踪法"><a href="#2-栈跟踪法" class="headerlink" title="2.栈跟踪法"></a>2.栈跟踪法</h3><p>有时候破解的时候，我们会找一些关键的注册字符串，例如“Register、failed、limit、pro”等等，但是很多程序其实在刚启动的时候就检测完了用户的合法性，所以可能造成定位不准确。一些混淆过的程序一般都是这样的。这时候我们就可以用栈跟踪法了，可以查看堆栈，能看到它所调用的方法，查看堆栈代码：<br>invoke-static {},Ljava/lang/Thread;-&gt;dumpStack()V<br>它的标签为：System.err  实际效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">java.lang.Throwable: stack dump  </div><div class="line">  at java.lang.Thread.dumpStack(Thread.java:612)  </div><div class="line">  at com.lohan.testbed.SomeClass.superFun(SomeClass.java:113)  </div><div class="line">  at com.lohan.testbed.Main.onCreate(Main.java:48)  </div><div class="line">  at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1047)  </div><div class="line">  at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2627)  </div><div class="line">  at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2679)  </div><div class="line">  at android.app.ActivityThread.access$2300(ActivityThread.java:125)  </div><div class="line">  at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2033)  </div><div class="line">  at android.os.Handler.dispatchMessage(Handler.java:99)  </div><div class="line">  at android.os.Looper.loop(Looper.java:123)  </div><div class="line">  at android.app.ActivityThread.main(ActivityThread.java:4627)  </div><div class="line">  at java.lang.reflect.Method.invokeNative(Native Method)  </div><div class="line">  at java.lang.reflect.Method.invoke(Method.java:521)  </div><div class="line">  at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:868)  </div><div class="line">  at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:626)  </div><div class="line">  at dalvik.system.NativeStart.main(Native Method)</div></pre></td></tr></table></figure></p>
+<p> 从第三行可以知道dumpStack实际上是在SomeClass类中的superFun（）函数里。然后superFun（）函数又是在onCreate（）函数里。以此类推。不过值得一提的是，如果app被混淆了，并且debugging 信息被删除了或者是被重命名了，会出现“Unknownsource”，但是还是可以判断的。</p>
+<h3 id="3-线程和处理器"><a href="#3-线程和处理器" class="headerlink" title="3.线程和处理器"></a>3.线程和处理器</h3><p>很多时候app用了大量线程之间的通信导致了栈跟踪法变得不是那么有效了，这个时候如果你还是打印出堆栈的信息的话，只会追溯到最后的那个线程的消息处理器，而原始的那个线程就被隐藏了。当然可以通过手工来追溯，方法是根据代码中的一些函数类似于sendMessage（）等等。这里有个更简单的方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 在handleMessage() 中的smali代码  </div><div class="line">invoke-static &#123;v0&#125;, Lsample/thread/messaging/ThreadMessaging;-&gt;access$0(Lsample/thread/messaging/ThreadMessaging;)Landroid/os/Handler;  </div><div class="line">move-result-object v2  </div><div class="line">invoke-virtual &#123;v2&#125;, Landroid/os/Handler;-&gt;obtainMessage()Landroid/os/Message;  </div><div class="line">move-result-object v1  </div><div class="line">//假设v2是你的处理器  </div><div class="line">invoke-virtual &#123;v2&#125;, Landroid/os/Handler;-&gt;getLooper()Landroid/os/Looper;  </div><div class="line">move-result-object v2  </div><div class="line">invoke-virtual &#123;v2&#125;, Landroid/os/Looper;-&gt;getThread()Ljava/lang/Thread;  </div><div class="line">move-result-object v2  </div><div class="line">invoke-virtual &#123;v2&#125;, Ljava/lang/Thread;-&gt;getName()Ljava/lang/String;  </div><div class="line">move-result-object v2</div></pre></td></tr></table></figure></p>
+<p>但是2个线程如果同时在运行，这个方法就不好使了，原因就留给大家去思考了。</p>
+<h3 id="4-”遗留下的宝藏”"><a href="#4-”遗留下的宝藏”" class="headerlink" title="4.”遗留下的宝藏”"></a>4.”遗留下的宝藏”</h3><p>这个方法虽然说跟运气脱不了干系，但在实际的运用中还是比较广泛的。因为程序员是人，是人就会有疏忽。在编写程序的时候，程序员会用很多的log来调试他自己写的程序是否正确，因此就给逆向人员留下了一笔宝贵的财富。当然，很有可能有一个Boolean类型调试变量来控制是否输出log信息，类似下面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">public class MyClass &#123;  </div><div class="line">  private Context myContext;  </div><div class="line">  private boolean DebugMode;  </div><div class="line">    </div><div class="line">  public MyClass(Context c)  </div><div class="line">  &#123;  </div><div class="line">    myContext = c;  </div><div class="line">    DebugMode = false;  </div><div class="line">  &#125;  </div><div class="line">    </div><div class="line">  public void someMethod()  </div><div class="line">  &#123;  </div><div class="line">    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(myContext);  </div><div class="line">  </div><div class="line">        if ( DebugMode )  </div><div class="line">            Log.d(&quot;someMethod&quot;, &quot;running someMethod now!&quot;);  </div><div class="line">            </div><div class="line">    SharedPreferences.Editor editor = settings.edit();  </div><div class="line">    try &#123;  </div><div class="line">      editor.putString(&quot;mobileID&quot;, getMobileID());  </div><div class="line">    &#125;  </div><div class="line">    catch (Exception e) &#123;  </div><div class="line">        e.printStackTrace();  </div><div class="line">    &#125;      </div><div class="line">    editor.commit();  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那我们只需要找到DebugMode的位置，把它置成“1”即可。</p>
+<h3 id="5-SmaliDebugging（APKtools）"><a href="#5-SmaliDebugging（APKtools）" class="headerlink" title="5.SmaliDebugging（APKtools）"></a>5.SmaliDebugging（APKtools）</h3><p>如果log信息都被程序员删除了，那怎么办？此时此刻，我们不得不拿出神器Apktools来调试一段一段的smali语句了，根据官方介绍，还可以单步走。是不是很诱人呢？具体可以看：<a href="http://code.google.com/p/android-apktool/wiki/SmaliDebugging" target="_blank" rel="external">http://code.google.com/p/android-apktool/wiki/SmaliDebugging</a></p>
+<h3 id="6-JDB神器"><a href="#6-JDB神器" class="headerlink" title="6.JDB神器"></a>6.JDB神器</h3><p>这是一个很强大的工具，应该是类似GNU或者GDB调试器。打开DDMS获取端口，然后连接调试器。<br>在Linux下的命令：<br>jdb -attach localhost:8616<br>在Windows下的命令：<br>jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=8616<br>出现这样的文字说明成功了：<br>next toyour App and the console should display something like this:<br>Setuncaught java.lang.Throwable<br>Setdeferred uncaught java.lang.Throwable<br>Initializingjdb …</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>当然还有更多更好的方法，希望大牛们继续补充。学习Android已经1个多星期了，菜鸟一枚。很多地方难免有疏漏之处或者错误，欢迎各位童鞋指正，也欢迎多多交流，共同学习进步。<br>ByEricky<br>2014.12.4</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/安全-安卓-apk反编译-代码分析/">安全 安卓 apk反编译 代码分析</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">The darkness is no darkness with thee.</a>
+  
+</div>
+<div class="theme-copyright">
+
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

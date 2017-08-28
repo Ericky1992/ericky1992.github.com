@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>第一次接触APK--破解纪实 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="The darkness is no darkness with thee.">
+  
+  
+    <meta name="description" content="前言昨天刚把公司任务弄得差不多。同事想学粤语，下了一款XX粤语手机APP，让我帮他弄下。之前也没接触过APK，这次就当学习好了。先下个JDK装好  再把Android SDK NDK统统装好，配置好环境变量，下载好需要的包，开搞。为了学习移动端的安全知识，买了一台安卓系统的手机作为一个测试环境。
+1.下载下来APK解包百度一下APK，11月20号还更新了。作者还挺勤快嘛。把APK下载下来，先解压看">
+  
+  <meta name="description" content="前言昨天刚把公司任务弄得差不多。同事想学粤语，下了一款XX粤语手机APP，让我帮他弄下。之前也没接触过APK，这次就当学习好了。先下个JDK装好  再把Android SDK NDK统统装好，配置好环境变量，下载好需要的包，开搞。为了学习移动端的安全知识，买了一台安卓系统的手机作为一个测试环境。 1.下载下来APK解包百度一下APK，11月20号还更新了。作者还挺勤快嘛。把APK下载下来，先解压看">
+<meta name="keywords" content="安全 安卓 apk反编译 代码分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次接触APK--破解纪实">
+<meta property="og:url" content="http://yoursite.com/2014/11/22/第一次接触APK【破解纪实】/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="前言昨天刚把公司任务弄得差不多。同事想学粤语，下了一款XX粤语手机APP，让我帮他弄下。之前也没接触过APK，这次就当学习好了。先下个JDK装好  再把Android SDK NDK统统装好，配置好环境变量，下载好需要的包，开搞。为了学习移动端的安全知识，买了一台安卓系统的手机作为一个测试环境。 1.下载下来APK解包百度一下APK，11月20号还更新了。作者还挺勤快嘛。把APK下载下来，先解压看">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210233709435?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210233727890?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210233746279?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210233859740?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210233927352?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210233945963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210234204306?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210234232792?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210234309231?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150210234308391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-28T13:03:31.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一次接触APK--破解纪实">
+<meta name="twitter:description" content="前言昨天刚把公司任务弄得差不多。同事想学粤语，下了一款XX粤语手机APP，让我帮他弄下。之前也没接触过APK，这次就当学习好了。先下个JDK装好  再把Android SDK NDK统统装好，配置好环境变量，下载好需要的包，开搞。为了学习移动端的安全知识，买了一台安卓系统的手机作为一个测试环境。 1.下载下来APK解包百度一下APK，11月20号还更新了。作者还挺勤快嘛。把APK下载下来，先解压看">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150210233709435?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/22/第一次接触APK【破解纪实】/">
+  <time datetime="2014-11-22T15:36:00.000Z">
+    2014-11-22
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">第一次接触APK--破解纪实</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨天刚把公司任务弄得差不多。同事想学粤语，下了一款XX粤语手机APP，让我帮他弄下。之前也没接触过APK，这次就当学习好了。<br>先下个JDK装好  再把Android SDK NDK统统装好，配置好环境变量，下载好需要的包，开搞。为了学习移动端的安全知识，买了一台安卓系统的手机作为一个测试环境。</p>
+<h3 id="1-下载下来APK解包"><a href="#1-下载下来APK解包" class="headerlink" title="1.下载下来APK解包"></a>1.下载下来APK解包</h3><p>百度一下APK，11月20号还更新了。作者还挺勤快嘛。把APK下载下来，先解压看看里面是什么。发现里面的东西打不开~应该是要解包。从网上找了一下，有个apktool的还是很nice的，用apktool解包后如图：<br><img src="http://img.blog.csdn.net/20150210233709435?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="2-再把程序安好，看看它里面到底是卖的什么药-gt-是个什么样的注册方法"><a href="#2-再把程序安好，看看它里面到底是卖的什么药-gt-是个什么样的注册方法" class="headerlink" title="2.再把程序安好，看看它里面到底是卖的什么药-&gt;是个什么样的注册方法:"></a>2.再把程序安好，看看它里面到底是卖的什么药-&gt;是个什么样的注册方法:</h3><p><img src="http://img.blog.csdn.net/20150210233727890?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150210233746279?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>从以上两张图，可以知道明白了。<br>1&gt;爆破。根据功能的需求一个地方一个地方的找，找到后再一一修改，但这显然不是最好的方法，繁琐而且不完美。<br>2&gt;从积分入手。<br>（1）此软件的积分可以支付宝购买<br>（2）下载它推荐的“垃圾应用程序”<br>（3）帮他宣传。微博分享等等。<br>当然可以从这3方面的任何一方面入手，我认为都可以达到需要的刷积分的效果。<br>我的第一思路就是找到这个积分变量，并修改它。如果能成功，这样的破解就会是很完美的破解了。</p>
+<h3 id="3-定位"><a href="#3-定位" class="headerlink" title="3.定位"></a>3.定位</h3><p>找字符串试试，到\res\values里面的String.xml里面看了一圈。<br><img src="http://img.blog.csdn.net/20150210233859740?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这个获取积分成功是不是很诱人呢？<br>打开Public.xml。找了对应的ID<br><img src="http://img.blog.csdn.net/20150210233927352?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>0x7f060010。<br>OK，接下来我们在smali文件夹里搜索这个的引用。<br>发现了一个文件引用它  位置在：smali\com\movesky\a\c.smali</p>
+<h3 id="4-分析代码"><a href="#4-分析代码" class="headerlink" title="4.分析代码"></a>4.分析代码</h3><p>由于对smali代码接触得不多，打开之后，发现完全看不懂。怎么办？没事~本来就是需要今后的学习。~既然看不懂smali代码，那我们为什么不可以换个代码看呢？<br>那就用Java decompiler吧  Java我总能看懂吧~<br><img src="http://img.blog.csdn.net/20150210233945963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>先看看C类里写的是什么东西。<br>一共有2个函数，成功的函数代码如下：<br>代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public final void onSuccess(long paramLong)  </div><div class="line">  &#123;  </div><div class="line">    String str = Integer.toString((int)(paramLong / 1L)); //取相应任务的分值  </div><div class="line">    Log.i(&quot;ZRD&quot;, &quot;奖励积分:&quot; + str);///刷新分值显示  </div><div class="line">    Toast.makeText(this.d, this.d.getString(2131099664) + str, 0).show();//显示获取积分成功  </div><div class="line">    K.a(this.d, new Handler(), str, &quot;dianjing&quot;, &quot;Add&quot;);//把积分数据更新下  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>OK.显然按照我的思路来，最后一句代码当然更吸引我。那继续追踪K类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">public final class K  </div><div class="line">&#123;  </div><div class="line">  private static List&lt;NameValuePair&gt; bb;  </div><div class="line">  </div><div class="line">  private static JSONArray a(String paramString1, String paramString2, String paramString3, String paramString4, String paramString5)  </div><div class="line">  &#123;  </div><div class="line">    JSONArray localJSONArray = new JSONArray();  </div><div class="line">    JSONObject localJSONObject = new JSONObject();  </div><div class="line">    try  </div><div class="line">    &#123;  </div><div class="line">      localJSONObject.put(&quot;Fld_Points&quot;, paramString1);  </div><div class="line">      localJSONObject.put(&quot;Fld_Action&quot;, paramString2);  </div><div class="line">      localJSONObject.put(&quot;Fld_State&quot;, paramString3);  </div><div class="line">      localJSONObject.put(&quot;Fld_Source&quot;, paramString4);  </div><div class="line">      localJSONObject.put(&quot;Fld_Note&quot;, paramString5);  </div><div class="line">      localJSONArray.put(localJSONObject);  </div><div class="line">      return localJSONArray;  </div><div class="line">    &#125;  </div><div class="line">    catch (JSONException localJSONException)  </div><div class="line">    &#123;  </div><div class="line">      while (true)  </div><div class="line">      &#123;  </div><div class="line">        localJSONException.printStackTrace();  </div><div class="line">        ZrdCommon.ZrdLog.Log(&quot;Err=&quot; + localJSONException.getMessage());  </div><div class="line">        localJSONObject = new JSONObject();  </div><div class="line">      &#125;  </div><div class="line">    &#125;  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  public static void a(Context paramContext, Handler paramHandler)  </div><div class="line">  &#123;  </div><div class="line">    a(paramContext, new JSONArray(), paramHandler);  </div><div class="line">  &#125;  </div><div class="line">public static void a(Context paramContext, Handler paramHandler, String paramString1, String paramString2, String paramString3)  </div><div class="line">  &#123;  </div><div class="line">    a(paramContext, a(paramString1, &quot;1&quot;, &quot;1&quot;, paramString2, paramString3), paramHandler);  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  public static void a(Context paramContext, Handler paramHandler, String paramString1, String paramString2, String paramString3, String paramString4, String paramString5)  </div><div class="line">  &#123;  </div><div class="line">    a(paramContext, a(paramString1, paramString2, paramString3, paramString4, paramString5), paramHandler);  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  private static void a(Context paramContext, JSONArray paramJSONArray, Handler paramHandler)  </div><div class="line">  &#123;  </div><div class="line">    Activity localActivity = (Activity)paramContext;  </div><div class="line">    ArrayList localArrayList = new ArrayList();  </div><div class="line">    bb = localArrayList;  </div><div class="line">    localArrayList.add(new BasicNameValuePair(&quot;_VKey&quot;, AppJNI.i()));  </div><div class="line">    bb.add(new BasicNameValuePair(&quot;_MaxID&quot;, &quot;0&quot;));  </div><div class="line">    bb.add(new BasicNameValuePair(&quot;_DevID&quot;, n.a(localActivity)));  </div><div class="line">    bb.add(new BasicNameValuePair(&quot;_BundleID&quot;, paramContext.getPackageName()));  </div><div class="line">    bb.add(newBasicNameValuePair(&quot;_BundleVersion&quot;, paramContext.getString(2131099661)));  </div><div class="line">    bb.add(new BasicNameValuePair(&quot;_ChannelID&quot;, paramContext.getString(2131099662)));  </div><div class="line">    bb.add(new BasicNameValuePair(&quot;_PointsDetail&quot;, paramJSONArray.toString()));  </div><div class="line">    ZrdCommon.ZrdLog.Log(&quot;YSpoints Updata PointsDetail=&quot; + paramJSONArray.toString());  </div><div class="line">    new L(paramContext, paramHandler).start();  </div><div class="line">  &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>找到对应的函数，一共套了几层，稍微需要一点耐心，但并没有难度。上面的几个a函数都是对传进来参数的一切处理，都是字符串游戏。对上述代码分析后可得 private static void a(Context paramContext, JSONArray paramJSONArray, Handler paramHandler)这个函数是最关键的函数。<br>分析paramJSONArray里的内容如下：<br>[“Fld_Points”:str,              //这里的str就是完成对应任务的分数.toString（）<br> “Fld_Action”:”1”,<br> “Fld_State”:”1”,<br> “Fld_Source”:”dianjing”,<br> “Fld_Note”:”Add”]          //方法为Add</p>
+<p>跟到这个时候发现这个函数的作用是客户端给服务器提交参数的函数。<br>悲剧了，分析了这么多~积分却不在本地。<br>于是这个时候可能又跳出有几种思路：<br>1&gt;劫持这个变量<br>2&gt;本地化，在本地完成任务达到免费使用<br>3&gt;骗服务器<br>又去String.xml翻了翻。发现一个新的东西<br><img src="http://img.blog.csdn.net/20150210234204306?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>URLPoints,那就是服务器存放APP积分的地址了。<br>进入如下：<br><img src="http://img.blog.csdn.net/20150210234232792?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>看到SumPoints 居然是个负的。<br>那我们可不可以不让它访问服务器而把那个变量改成自己想要的值呢？我觉得这是一种可行的思路。<br>因为第一次弄，思路也是天马行空。当时想，<br>他这种访问服务器获取积分的方法，地址都是一个PHP文件。那肯定要验证机器码的，然后我把手机机器码屏蔽掉了，发现积分溢出了。贴出两张图为证：</p>
+<p><img src="http://img.blog.csdn.net/20150210234309231?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150210234308391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这样这个程序也算是完美破解了~<br>第一次接触apk破解，难免有理解得不对的地方和弯路，希望大家能多多指正，多多交流方法，希望把不足之处告诉我，共同进步。<br>                                                                                    2014.11.22<br>                                                                                    By Ericky</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/安全-安卓-apk反编译-代码分析/">安全 安卓 apk反编译 代码分析</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">The darkness is no darkness with thee.</a>
+  
+</div>
+<div class="theme-copyright">
+
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

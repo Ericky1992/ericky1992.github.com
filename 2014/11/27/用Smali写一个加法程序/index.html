@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>用Smali写一个加法程序 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="The darkness is no darkness with thee.">
+  
+  
+    <meta name="description" content="最近对移动端产生了很浓厚的兴趣，那就开始学习吧!因为还有工作任务，忙里偷闲把丰生强的前3章认真读了一遍。小结内容是说必须熟练掌握这一部分的内容，可通过手动编写Dalvik汇编代码来熟悉一下指令，为后面的分析夯实好基础。书上的是一个显示HelloWorld的例子，为了练习好基础。准备要用Dalvik汇编写一个简单的程序，功能如下:
+按照书上的，把框架搭好如下：123.class public Lte">
+  
+  <meta name="description" content="最近对移动端产生了很浓厚的兴趣，那就开始学习吧!因为还有工作任务，忙里偷闲把丰生强的前3章认真读了一遍。小结内容是说必须熟练掌握这一部分的内容，可通过手动编写Dalvik汇编代码来熟悉一下指令，为后面的分析夯实好基础。书上的是一个显示HelloWorld的例子，为了练习好基础。准备要用Dalvik汇编写一个简单的程序，功能如下: 按照书上的，把框架搭好如下：123.class public Lte">
+<meta name="keywords" content="安卓 应用程序 代码分析 安全 反编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Smali写一个加法程序">
+<meta property="og:url" content="http://yoursite.com/2014/11/27/用Smali写一个加法程序/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="最近对移动端产生了很浓厚的兴趣，那就开始学习吧!因为还有工作任务，忙里偷闲把丰生强的前3章认真读了一遍。小结内容是说必须熟练掌握这一部分的内容，可通过手动编写Dalvik汇编代码来熟悉一下指令，为后面的分析夯实好基础。书上的是一个显示HelloWorld的例子，为了练习好基础。准备要用Dalvik汇编写一个简单的程序，功能如下: 按照书上的，把框架搭好如下：123.class public Lte">
+<meta property="og:image" content="http://img.blog.csdn.net/20150308193254406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150308193151554?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150308193308368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150308193312517?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150308193409582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150308193302222?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-28T13:00:35.133Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Smali写一个加法程序">
+<meta name="twitter:description" content="最近对移动端产生了很浓厚的兴趣，那就开始学习吧!因为还有工作任务，忙里偷闲把丰生强的前3章认真读了一遍。小结内容是说必须熟练掌握这一部分的内容，可通过手动编写Dalvik汇编代码来熟悉一下指令，为后面的分析夯实好基础。书上的是一个显示HelloWorld的例子，为了练习好基础。准备要用Dalvik汇编写一个简单的程序，功能如下: 按照书上的，把框架搭好如下：123.class public Lte">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150308193254406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/27/用Smali写一个加法程序/">
+  <time datetime="2014-11-27T11:25:43.000Z">
+    2014-11-27
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">用Smali写一个加法程序</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>最近对移动端产生了很浓厚的兴趣，那就开始学习吧!因为还有工作任务，忙里偷闲把丰生强的前3章认真读了一遍。小结内容是说必须熟练掌握这一部分的内容，可通过手动编写Dalvik汇编代码来熟悉一下指令，为后面的分析夯实好基础。<br>书上的是一个显示HelloWorld的例子，为了练习好基础。准备要用Dalvik汇编写一个简单的程序，功能如下:</p>
+<p><img src="http://img.blog.csdn.net/20150308193254406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>按照书上的，把框架搭好如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.class public Ltest;  </div><div class="line">.super Ljava/lang/Object;  </div><div class="line">.method public constructor &lt;init&gt;()V</div></pre></td></tr></table></figure></p>
+<p>#寄存器数量待定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">    .registers 1   </div><div class="line">.parameter  </div><div class="line">.prologue  </div><div class="line">    return-void  </div><div class="line">.end method</div></pre></td></tr></table></figure></p>
+<p>思路：由于要传2个参数进去计算，并不是像书上的例子一样，只是打印出一行字，所以要弄清楚参数是如何传进去的。写一个简单的程序反编译看看。程序代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class test2 &#123;  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">    String a = args[0];         </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译成smali代码先看看参数是怎么样传进去的，smali代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">.class public Ltest2;  </div><div class="line">.super Ljava/lang/Object;  </div><div class="line">.source &quot;test2.java&quot;  </div><div class="line"># direct methods  </div><div class="line">.method public constructor &lt;init&gt;()V  </div><div class="line">    .registers 1  </div><div class="line">    .prologue  </div><div class="line">    .line 1  </div><div class="line">    invoke-direct &#123;p0&#125;, Ljava/lang/Object;-&gt;&lt;init&gt;()V  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">.method public static main([Ljava/lang/String;)V  </div><div class="line">    .registers 2  </div><div class="line">    .prologue  </div><div class="line">    .line 4  </div><div class="line">    const/4 v0, 0x0  </div><div class="line">    aget-object v0, p0, v0  </div><div class="line">   </div><div class="line">    .line 6  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">发现除了main函数外还有一个direct method：  </div><div class="line">.method public constructor &lt;init&gt;()V  </div><div class="line">表示该类的不带参数缺省的构造方法  </div><div class="line">看来这就是传参的关键。  </div><div class="line"> const/4 v0, 0x0  </div><div class="line"> aget-object v0, p0, v0  </div><div class="line">Main函数中用这2句的接受传进来的值。  </div><div class="line">所以应该先添加这个构造方法：  </div><div class="line"># direct methods  </div><div class="line">.method public constructor &lt;init&gt;()V  </div><div class="line">    .registers 1  </div><div class="line">    .prologue  </div><div class="line">    invoke-direct &#123;p0&#125;, Ljava/lang/Object;-&gt;&lt;init&gt;()V  </div><div class="line">    return-void  </div><div class="line">.end method  </div><div class="line">接着写代码如下：  </div><div class="line">#V0 V1 清零  </div><div class="line"> const/4 v0, 0x0  </div><div class="line"> const/4 v1, 0x0  </div><div class="line">#接收传进来的2个参数  </div><div class="line"> aget-object v0, p0, v0  </div><div class="line">     aget-object v1, p0, v1  </div><div class="line">#把第一个参数转化成int类型 给vo  </div><div class="line">    invoke-static &#123;v0&#125;, Ljava/lang/Integer;-&gt;parseInt(Ljava/lang/String;)I  </div><div class="line">    move-result v0  </div><div class="line">#把第二个参数转化成int类型 给v1  </div><div class="line">    invoke-static &#123;v1&#125;, Ljava/lang/Integer;-&gt;parseInt(Ljava/lang/String;)I  </div><div class="line">    move-result v1  </div><div class="line">#两个参数相加  值存 给vo  </div><div class="line">    add-int/2addr v0, v1  </div><div class="line">#把vo中的结果转化成String类型  再给v0  </div><div class="line">    invoke-static &#123;v0&#125;, Ljava/lang/String;-&gt;valueOf(I)Ljava/lang/String;  </div><div class="line">    move-result-object v0  </div><div class="line">#构造一个String类型对象的新实例 把值赋给v2  </div><div class="line">    new-instance v2, Ljava/lang/StringBuilder;  </div><div class="line">#调用实例的直接方法  </div><div class="line">    invoke-direct &#123;v2&#125;, Ljava/lang/StringBuilder;-&gt;&lt;init&gt;()V  </div><div class="line">#定义一个字符串常量  </div><div class="line">    const-string v3, &quot;The Sum is :&quot;  </div><div class="line">#调用实例方法，把v3与v2里的字符串相加再给v2 invoke-virtual&#123;v2,v3&#125;,Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;  </div><div class="line">move-result-object v2  </div><div class="line">#调用实例方法，把v0与v2里的字符串相加再给v2   </div><div class="line">invoke-virtual&#123;v2,v0&#125;,Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;  </div><div class="line">move-result-object v2  </div><div class="line">#输出结果  </div><div class="line">invoke-virtual &#123;v1, v2&#125;, Ljava/io/PrintStream;-&gt;println(Ljava/lang/String;)V</div></pre></td></tr></table></figure></p>
+<p>终于写完了，我们编译好来看看结果。<br>编译出dex文件：<br><img src="http://img.blog.csdn.net/20150308193151554?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>Push到Android里:<br><img src="http://img.blog.csdn.net/20150308193308368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>执行：<br><img src="http://img.blog.csdn.net/20150308193312517?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>发现报错了。百思不得其解，纠结了好久。代码也检查了好几遍，最后都要崩溃了，还是出错。后来实在忍无可忍，写了个程序反编译出dex文件看看吧。结果发现了原来少了这么一句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#此句加在输入结果之前，将v2里的东西转化成String类型。  </div><div class="line"> invoke-virtual &#123;v2&#125;, Ljava/lang/StringBuilder;-&gt;toString()Ljava/lang/String;  </div><div class="line">move-result-object v2</div></pre></td></tr></table></figure></p>
+<p>重新编译dex–&gt;PUSH–&gt;执行再试试：<br><img src="http://img.blog.csdn.net/20150308193409582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>好了，当然编写的过程中可能会出现各种各样的错误，需要耐心+毅力。<br>最后要说一下，.parameter这行我是删了，用了2个版本的:<br><img src="http://img.blog.csdn.net/20150308193302222?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>都试了一下，发现没有.parameter，有的话会报错。可能是丰写此书的时候版本还很低吧，这个大家要注意哦。<br>总的来说，虽然就这么一点代码，也不难。但确实是花了我不少时间，不过同时也学到了不少东西，对smali语句和adb命令，dex、class、smali等几种格式的互相转化也很熟练了。<br>最后感谢丰大牛，书写得很好，有的细节不够完美，但瑕不掩瑜。路漫漫其修远兮，打牢基础才能走得更远。<br>By Ericky<br>2014.11.27</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/安卓-应用程序-代码分析-安全-反编译/">安卓 应用程序 代码分析 安全 反编译</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">The darkness is no darkness with thee.</a>
+  
+</div>
+<div class="theme-copyright">
+
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

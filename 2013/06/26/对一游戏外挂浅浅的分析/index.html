@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>对一游戏外挂浅浅的分析 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="The darkness is no darkness with thee.">
+  
+  
+    <meta name="description" content="前言夜阑静，已是凌晨2：11分，明天还要实习，但这几天在研究一个网页游戏的辅助，也分享下自己的一些笔记和心得，虽然我是个大菜鸟。
+真的是很遗憾，今天花了6，7个小时分析，基本上每一行都写了注释，后来分析了另外一个程序，注释和断点都清除了。下次一定要保存好！大家凑合着看吧T T
+1.查壳PEID—-&amp;gt;ASPack 2.12 -&amp;gt; Alexey Solodovnikov手脱脚本脱脱壳机脱都">
+  
+  <meta name="description" content="前言夜阑静，已是凌晨2：11分，明天还要实习，但这几天在研究一个网页游戏的辅助，也分享下自己的一些笔记和心得，虽然我是个大菜鸟。 真的是很遗憾，今天花了6，7个小时分析，基本上每一行都写了注释，后来分析了另外一个程序，注释和断点都清除了。下次一定要保存好！大家凑合着看吧T T 1.查壳PEID—-&amp;gt;ASPack 2.12 -&amp;gt; Alexey Solodovnikov手脱脚本脱脱壳机脱都">
+<meta name="keywords" content="游戏 网页游戏 破解 安全 解密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对一游戏外挂浅浅的分析">
+<meta property="og:url" content="http://yoursite.com/2013/06/26/对一游戏外挂浅浅的分析/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="前言夜阑静，已是凌晨2：11分，明天还要实习，但这几天在研究一个网页游戏的辅助，也分享下自己的一些笔记和心得，虽然我是个大菜鸟。 真的是很遗憾，今天花了6，7个小时分析，基本上每一行都写了注释，后来分析了另外一个程序，注释和断点都清除了。下次一定要保存好！大家凑合着看吧T T 1.查壳PEID—-&amp;gt;ASPack 2.12 -&amp;gt; Alexey Solodovnikov手脱脚本脱脱壳机脱都">
+<meta property="og:image" content="http://img.blog.csdn.net/20150128135059625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-28T13:02:51.558Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对一游戏外挂浅浅的分析">
+<meta name="twitter:description" content="前言夜阑静，已是凌晨2：11分，明天还要实习，但这几天在研究一个网页游戏的辅助，也分享下自己的一些笔记和心得，虽然我是个大菜鸟。 真的是很遗憾，今天花了6，7个小时分析，基本上每一行都写了注释，后来分析了另外一个程序，注释和断点都清除了。下次一定要保存好！大家凑合着看吧T T 1.查壳PEID—-&amp;gt;ASPack 2.12 -&amp;gt; Alexey Solodovnikov手脱脚本脱脱壳机脱都">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150128135059625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2013/06/26/对一游戏外挂浅浅的分析/">
+  <time datetime="2013-06-25T19:05:00.000Z">
+    2013-06-26
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">对一游戏外挂浅浅的分析</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>夜阑静，已是凌晨2：11分，明天还要实习，但这几天在研究一个网页游戏的辅助，也分享下自己的一些笔记和心得，虽然我是个大菜鸟。</p>
+<p>真的是很遗憾，今天花了6，7个小时分析，基本上每一行都写了注释，后来分析了另外一个程序，注释和断点都清除了。下次一定要保存好！大家凑合着看吧T T</p>
+<h2 id="1-查壳"><a href="#1-查壳" class="headerlink" title="1.查壳"></a>1.查壳</h2><p>PEID—-&gt;ASPack 2.12 -&gt; Alexey Solodovnikov<br>手脱<br>脚本脱<br>脱壳机脱<br>都行<br>记得用LordPE 和ImportREC 修复一下就好了。</p>
+<h2 id="2-来到代码入口点："><a href="#2-来到代码入口点：" class="headerlink" title="2.来到代码入口点："></a>2.来到代码入口点：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">004F568D &gt;  55              push ebp  </div><div class="line">004F568E    8BEC            mov ebp,esp  </div><div class="line">004F5690    6A FF           push -0x1  </div><div class="line">004F5692    68 084B5500     push Dumped_.00554B08  </div><div class="line">004F5697    68 44804F00     push Dumped_.004F8044  </div><div class="line">004F569C    64:A1 00000000  mov eax,dword ptr fs:[0]  </div><div class="line">004F56A2    50              push eax  </div><div class="line">004F56A3    64:8925 0000000&gt;mov dword ptr fs:[0],esp  </div><div class="line">004F56AA    83EC 58         sub esp,0x58  </div><div class="line">004F56AD    53              push ebx  </div><div class="line">004F56AE    56              push esi  </div><div class="line">004F56AF    57              push edi</div></pre></td></tr></table></figure>
+<p>明显的C++头。<br>我在MessageBoxA 下断点：<br>注册按钮之后<br>断下来了来到:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">77D507EA &gt;  8BFF            mov edi,edi  </div><div class="line">77D507EC    55              push ebp  </div><div class="line">77D507ED    8BEC            mov ebp,esp  </div><div class="line">77D507EF    833D BC14D777 0&gt;cmp dword ptr ds:[0x77D714BC],0x0  </div><div class="line">77D507F6    74 24           je short user32.77D5081C  </div><div class="line">77D507F8    64:A1 18000000  mov eax,dword ptr fs:[0x18]  </div><div class="line">77D507FE    6A 00           push 0x0  </div><div class="line">77D50800    FF70 24         push dword ptr ds:[eax+0x24]  </div><div class="line">77D50803    68 241BD777     push user32.77D71B24  </div><div class="line">77D50808    FF15 C412D177   call dword ptr ds:[&lt;&amp;KERNEL32.Interlocke&gt;; kernel32.InterlockedCompareExchange  </div><div class="line">77D5080E    85C0            test eax,eax  </div><div class="line">77D50810    75 0A           jnz short user32.77D5081C  </div><div class="line">77D50812    C705 201BD777 0&gt;mov dword ptr ds:[0x77D71B20],0x1  </div><div class="line">77D5081C    6A 00           push 0x0  </div><div class="line">77D5081E    FF75 14         push dword ptr ss:[ebp+0x14]  </div><div class="line">77D50821    FF75 10         push dword ptr ss:[ebp+0x10]  </div><div class="line">77D50824    FF75 0C         push dword ptr ss:[ebp+0xC]  </div><div class="line">77D50827    FF75 08         push dword ptr ss:[ebp+0x8]  </div><div class="line">77D5082A    E8 2D000000     call user32.MessageBoxExA  </div><div class="line">77D5082F    5D              pop ebp  </div><div class="line">77D50830    C2 1000         retn 0x10</div></pre></td></tr></table></figure></p>
+<p>因为没发现关键跳，因此我Ctrl+F9 F8 几层之后，来到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">0048ED10   .  83EC 64       sub esp,64  </div><div class="line">0048ED13   .  56            push esi                                 ;  Dumped_.004613AC  </div><div class="line">0048ED14   .  8B7424 74     mov esi,dword ptr ss:[esp+74]            ;  Dumped_.00580070  </div><div class="line">0048ED18   .  57            push edi  </div><div class="line">0048ED19   .  8B7E 08       mov edi,dword ptr ds:[esi+8]  </div><div class="line">0048ED1C   .  57            push edi  </div><div class="line">0048ED1D   .  E8 0E410100   call Dumped_.004A2E30  </div><div class="line">0048ED22   .  83C4 04       add esp,4  </div><div class="line">0048ED25   .  85C0          test eax,eax  </div><div class="line">0048ED27   .  74 10         je short Dumped_.0048ED39  </div><div class="line">0048ED29   .  8D4424 08     lea eax,dword ptr ss:[esp+8]  </div><div class="line">0048ED2D   .  50            push eax  </div><div class="line">0048ED2E   .  56            push esi                                 ;  Dumped_.004613AC  </div><div class="line">0048ED2F   .  E8 FCE2FFFF   call Dumped_.0048D030  </div><div class="line">0048ED34   .  83C4 08       add esp,8  </div><div class="line">0048ED37   .  EB 42         jmp short Dumped_.0048ED7B  </div><div class="line">0048ED39   &gt;  81FF 04000080 cmp edi,80000004                         ;  Switch (cases 80000002..80000004)  </div><div class="line">0048ED3F      75 04         jnz short Dumped_.0048ED45  </div><div class="line">0048ED41   .  8B0E          mov ecx,dword ptr ds:[esi]               ;  Case 80000004 (SINGLE STEP) of switch 0048ED39  </div><div class="line">0048ED43   .  EB 3A         jmp short Dumped_.0048ED7F  </div><div class="line">0048ED45   &gt;  81FF 02000080 cmp edi,80000002  </div><div class="line">0048ED4B      75 12         jnz short Dumped_.0048ED5F  </div><div class="line">0048ED4D   .  8B16          mov edx,dword ptr ds:[esi]               ;  Case 80000002 (DATATYPE MISALIGNMENT) of switch 0048ED39  </div><div class="line">0048ED4F   .  8D4C24 08     lea ecx,dword ptr ss:[esp+8]  </div><div class="line">0048ED53   .  51            push ecx  </div><div class="line">0048ED54   .  52            push edx</div></pre></td></tr></table></figure>
+<p>这里有一个跳是可以跳过messagebox的，可是我试了之后，发现程序跑飞，因此不得不再次找上一级的CALL。。。。<br>根据远CALLF7  近CALL F8的原则  时时刻刻观察OD的几个窗口，真的叫一个目不转睛！<br>跟踪+跟踪+再跟踪！坚持+坚持+再坚持！<br>看到一行疑似注册码的字母，相当兴奋，仔细一分析，原来是磁盘序列号，，接着是各种序列号，MAC，机器注册码，总之走了很久。<br>name和serial终于出现！本来要放弃的我又兴奋起来了，可惜仔细分析之后，并没有明码比较，而是和<a href="http://www.etigou.com/jqm/index.php/index/zhuce/cardid/有关，于是我想" target="_blank" rel="external">http://www.etigou.com/jqm/index.php/index/zhuce/cardid/有关，于是我想</a> 可能是网络验证。<br>fosom师傅之前虽然指点过 要修改几个跳转<br>但是接下来还是让我发现了一个关键跳，只要修改一个 可以实现注册界面上的爆破：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">0040B9F2    33C9            xor ecx,ecx       此时；ecx=0  </div><div class="line">0040B9F4    41              inc ecx  </div><div class="line">0040B9F5    51              push ecx  </div><div class="line">0040B9F6    50              push eax  </div><div class="line">0040B9F7    3BC8            cmp ecx,eax       ；此时ecx=1 eax=0  </div><div class="line">0040B9F9    0F8F 8F020000   jg Dumped_.0040BC8E                      ; 关键跳，跳则死，不跳成功    （但是这个程序跳了之后再次运行到这里的时候必须不跳）</div></pre></td></tr></table></figure></p>
+<p>ecx 此处是计注册次数用的<br>爆破1.<br>我先将jg 改成je 发现可以注册成功，但是注册成功的窗口i一直弹出，关了继续弹出。<br>面对这样，我写了个内存注册机，点击注册之前先将jg改成je，弹出框后再将je改成jg，于是就成功提示“注册成功”了。<br>爆破2.<br>我在想，如果可以将eax改成1的话，那么也能实现第一次不跳，之后跳转恢复，实现爆破，可惜字节不够，fosom师傅说用SMC技术，可是我找了一下，CC也很少。。<br>最后我往上找，<br>把0040B9F2    33C9            xor ecx,ecx<br>改成not ecx  让ecx=FFFFFFFF<br>成功实现了爆破<br>爆破3.<br>我继续往上找：<br>想办法让一个寄存器的值=1，我是让EDX=1了<br>然后在0040B9F7    3BC8            cmp ecx,eax<br>这一句上，将eax改成edx 也能实现爆破。</p>
+<p>其实我觉得 还有很多方法的，比如说，既然关键跳是0040B9F9    0F8F 8F020000   jg Dumped_.0040BC8E<br>而JG的测试条件是SF=OF且ZF=0，我们是否能找到影响标志位的语句来影响这个跳转呢？</p>
+<p><img src="http://img.blog.csdn.net/20150128135059625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如图所示：<br>1，在需要改的jne，修改成jmp。<br>2，在所在模块，找9个空字节（连续的CC很多，容易找）。<br>  这样就实现了，运行一次就自动恢复原有代码。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我觉得很不错，今天虽然累了 明天还要实习。但是收获颇多，我会继续努力的！</p>
+<p>当然还有点问题，虽然只改了和少部分代码，但是还是有功能失效了，我觉得可以用对比分析来找出失效的原因，再加以改正就能成功。</p>
+<p>努力早就实力！态度决定高度！<br>加油~！<br>                                                       2013.6.26.凌晨3点5分 </p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/游戏-网页游戏-破解-安全-解密/">游戏 网页游戏 破解 安全 解密</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">The darkness is no darkness with thee.</a>
+  
+</div>
+<div class="theme-copyright">
+
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

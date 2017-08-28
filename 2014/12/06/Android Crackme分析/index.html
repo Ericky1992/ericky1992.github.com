@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Android Crackme分析 | Ericky1992</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="The darkness is no darkness with thee.">
+  
+  
+    <meta name="description" content="1.Crackme01用APKtools反编译成smali代码 定位到关键部位如下：1234567891011121314151617invoke-static &amp;#123;v1&amp;#125;, Lcom/google/youngandroid/runtime;-&amp;gt;sanitizeComponentData(Ljava/lang/Object;)Ljava/lang/Object;">
+  
+  <meta name="description" content="1.Crackme01用APKtools反编译成smali代码 定位到关键部位如下：1234567891011121314151617invoke-static &amp;#123;v1&amp;#125;, Lcom/google/youngandroid/runtime;-&amp;gt;sanitizeComponentData(Ljava/lang/Object;)Ljava/lang/Object;">
+<meta name="keywords" content="安全 安卓 apk反编译 代码分析 APK破解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Crackme分析">
+<meta property="og:url" content="http://yoursite.com/2014/12/06/Android Crackme分析/index.html">
+<meta property="og:site_name" content="Ericky1992">
+<meta property="og:description" content="1.Crackme01用APKtools反编译成smali代码 定位到关键部位如下：1234567891011121314151617invoke-static &amp;#123;v1&amp;#125;, Lcom/google/youngandroid/runtime;-&amp;gt;sanitizeComponentData(Ljava/lang/Object;)Ljava/lang/Object;">
+<meta property="og:image" content="http://img.blog.csdn.net/20150214232239462?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150214232250772?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150214232309042?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-08-28T13:03:56.055Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Crackme分析">
+<meta name="twitter:description" content="1.Crackme01用APKtools反编译成smali代码 定位到关键部位如下：1234567891011121314151617invoke-static &amp;#123;v1&amp;#125;, Lcom/google/youngandroid/runtime;-&amp;gt;sanitizeComponentData(Ljava/lang/Object;)Ljava/lang/Object;">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150214232239462?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Ericky1992</a></h1>
+    <p><a href="/">pursue ceaselessly</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/">About</a></li>
+      
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/06/Android Crackme分析/">
+  <time datetime="2014-12-06T15:21:00.000Z">
+    2014-12-06
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Android Crackme分析</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="1-Crackme01"><a href="#1-Crackme01" class="headerlink" title="1.Crackme01"></a>1.Crackme01</h2><p>用APKtools反编译成smali代码 定位到关键部位如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">invoke-static &#123;v1&#125;, Lcom/google/youngandroid/runtime;-&gt;sanitizeComponentData(Ljava/lang/Object;)Ljava/lang/Object;  </div><div class="line">    move-result-object v1  </div><div class="line">    sget-object v2, Lappinventor/ai_garikoitzmartinez/crackme01/Screen1;-&gt;Lit35:Lgnu/math/IntNum; #V2=0x2E812  </div><div class="line">    invoke-static &#123;v1, v2&#125;, Lgnu/lists/LList;-&gt;list2(Ljava/lang/Object;Ljava/lang/Object;)Lgnu/lists/Pair;  </div><div class="line">    move-result-object v1  </div><div class="line">sget-object v2, Lappinventor/ai_garikoitzmartinez/crackme01/Screen1;-&gt;Lit36:Lgnu/lists/PairWithPosition;  </div><div class="line">    const-string v3, &quot;&gt;&quot;  </div><div class="line">    invoke-static &#123;v0, v1, v2, v3&#125;, Lcom/google/youngandroid/runtime;-&gt;callYailPrimitive(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;  </div><div class="line">    move-result-object v0  </div><div class="line">    sget-object v1, Ljava/lang/Boolean;-&gt;FALSE:Ljava/lang/Boolean; #v1=false  </div><div class="line">    if-eq v0, v1, :cond_0   #v0=v1  ÔòÊ§°Ü  Sv0ÒªÎªÕæ  </div><div class="line">    sget-object v0, Lappinventor/ai_garikoitzmartinez/crackme01/Screen1;-&gt;Lit0:Lgnu/mapping/SimpleSymbol;  </div><div class="line">    invoke-static &#123;v0&#125;, Lcom/google/youngandroid/runtime;-&gt;lookupInCurrentFormEnvironment(Lgnu/mapping/Symbol;)Ljava/lang/Object;  </div><div class="line">    move-result-object v0  </div><div class="line">    sget-object v1, Lappinventor/ai_garikoitzmartinez/crackme01/Screen1;-&gt;Lit13:Lgnu/mapping/SimpleSymbol;  </div><div class="line">   </div><div class="line">    const-string v2, &quot;Crackme01!  &lt;&lt; by deurus &gt;&gt; - Good boy!&quot;</div></pre></td></tr></table></figure></p>
+<p>如果是爆破的话，把False改成true即可。而我想的是分析下这个cm的算法，于是开始向上走起了。因为v1是False，所以v0要为True。<br>V0–&gt;从callYailPrimitive(,,,)返回过来的，找到这函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.method public static callYailPrimitive(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;  </div><div class="line">    .locals 3  </div><div class="line">    .parameter &quot;prim&quot;      对应V0 为函数返回值  </div><div class="line">    .parameter &quot;arglist&quot; 对应V1  </div><div class="line">    .parameter &quot;typelist&quot; 对应V2 Lit36  </div><div class="line">.parameter &quot;codeblocks$Mnname&quot; 对应V3 = “&gt;”</div></pre></td></tr></table></figure></p>
+<p>因此另外几个参数也要知晓才好分析，于是继续往上看 v3= ‘&gt;’,然后又继续往上看，V2的值是Lit36。V1的值是list2函数返回的。继续追list2函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public static Pair list2(Object arg1, Object arg2) &#123;  </div><div class="line">        return new Pair(arg1, new Pair(arg2, LList.Empty));  </div><div class="line">&#125;  </div><div class="line">只是创建了两个Pair类 ，继续向上分invoke-static &#123;v0, v1, v5, v2&#125;, Lgnu/lists/PairWithPosition;-&gt;make(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;I)Lgnu/lists/PairWithPosition;  </div><div class="line">    move-result-object v0  </div><div class="line">    sput-object v0, Lappinventor/ai_garikoitzmartinez/crackme01/Screen1;-&gt;Lit36:Lgnu/lists/PairWithPosition;  </div><div class="line">    const v0, 0x2e812  </div><div class="line">    invoke-static &#123;v0&#125;, Lgnu/math/IntNum;-&gt;make(I)Lgnu/math/IntNum;  </div><div class="line">    move-result-object v0  </div><div class="line">    sput-object v0, Lappinventor/ai_garikoitzmartinez/crackme01/Screen1;-&gt;Lit35:Lgnu/math/IntNum;析：</div></pre></td></tr></table></figure></p>
+<p>可以找到V1为1个装有2个成员的List，一个为用户自己输入的。一个就是Lit35=0x2E812。<br>而V2是多少，通过上述的代码赋给Lit36的值 以及callYailPrimitive函数中参数的定义，我想应该就是2个int类型了。<br>再把这部分分析结果拿出来看一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.locals 3  </div><div class="line">    .parameter &quot;prim&quot;      对应V0 为函数返回值  也是关键点  </div><div class="line">    .parameter &quot;arglist&quot; 2个参数  一个用户输入的  一个为0x2e812  </div><div class="line">    .parameter &quot;typelist&quot; int int  </div><div class="line">.parameter &quot;codeblocks$Mnname&quot; 对应V3 = “&gt;”</div></pre></td></tr></table></figure></p>
+<p>不妨大胆猜想一下，应该就是这2个数比大小吧。于是进去callYailPrimitive函数中分析了下，确实如此：</p>
+<p><img src="http://img.blog.csdn.net/20150214232239462?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150214232250772?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="2-Crackme02"><a href="#2-Crackme02" class="headerlink" title="2.Crackme02"></a>2.Crackme02</h2><p>如果是爆破的话还是只要改一个地方：<br>sget-object v1, Ljava/lang/Boolean;-&gt;FALSE:Ljava/lang/Boolean;</p>
+<p>if-eq v0, v1, :cond_2<br>把FALSE 改成 TRUE 即可。注册成功背景为绿色：</p>
+<p><img src="http://img.blog.csdn.net/20150214232309042?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGs5MjU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>还是老套路，安好程序看一看先，看是个什么情况。发现了输入name和序列号是不正确的情况下，背景会显示为红色。然后用神器反编译好smali，我们去看代码，看看有什么我们的新发现！<br>分析了一会smali之后，发现还是看着蛋疼，看看源码吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line">public Object Button1_check$Click() &#123;  </div><div class="line">        O后面还有2个给大家玩吧~累 休息  </div><div class="line">总的来说主要提高了对smali代码的熟练度~收获还不错，纠正了一些理解上的偏差和巩固了之前的smali。(*^__^*)   </div><div class="line">  </div><div class="line">  </div><div class="line">BY Ericky   </div><div class="line">2014.12.6bject v0;  </div><div class="line">        String v7 = &quot;+&quot;;  </div><div class="line">        String v5 = &quot;&quot;;  </div><div class="line">        runtime.addToCurrentFormEnvironment(Screen1.Lit12, Screen1.Lit28);  </div><div class="line">        runtime.addToCurrentFormEnvironment(Screen1.Lit14, Screen1.Lit11);  </div><div class="line">        if(runtime.isYailEqual(runtime.sanitizeComponentData(Invoke.invoke.apply2(runtime.lookupInCurrentFormEnvironment(  </div><div class="line">                Screen1.Lit37), Screen1.Lit22)), v5) != Boolean.FALSE) &#123;  </div><div class="line">            runtime.callComponentMethod(Screen1.Lit53, Screen1.Lit54, LList.list3(&quot;Please Enter the Name&quot;,   </div><div class="line">                    &quot;Error&quot;, &quot;Ok&quot;), Screen1.Lit55);  </div><div class="line">            runtime.$PcSetAndCoerceProperty$Ex(runtime.lookupInCurrentFormEnvironment(Screen1.Lit37),   </div><div class="line">                    Screen1.Lit22, v5, Screen1.Lit20);  </div><div class="line">            v0 = runtime.$PcSetAndCoerceProperty$Ex(runtime.lookupInCurrentFormEnvironment(Screen1.Lit47),   </div><div class="line">                    Screen1.Lit22, v5, Screen1.Lit20);  </div><div class="line">        &#125;  </div><div class="line">        else &#123;  </div><div class="line">            while(runtime.callYailPrimitive(Scheme.numLEq, LList.list2(runtime.lookupInCurrentFormEnvironment(  </div><div class="line">                    Screen1.Lit12), runtime.callYailPrimitive(strings.string$Mnlength, LList.list1(runtime  </div><div class="line">                    .sanitizeComponentData(Invoke.invoke.apply2(runtime.lookupInCurrentFormEnvironment(  </div><div class="line">                    Screen1.Lit37), Screen1.Lit22))), Screen1.Lit56, &quot;length&quot;)), Screen1.Lit57, &quot;&lt;=&quot;)  </div><div class="line">                     != Boolean.FALSE) &#123;  </div><div class="line">                runtime.addToCurrentFormEnvironment(Screen1.Lit10, runtime.callComponentMethod(Screen1  </div><div class="line">                        .Lit58, Screen1.Lit59, LList.list1(runtime.callComponentMethod(Screen1.Lit58,   </div><div class="line">                        Screen1.Lit60, LList.Empty, LList.Empty)), Screen1.Lit61));  </div><div class="line">                runtime.addToCurrentFormEnvironment(Screen1.Lit14, runtime.callYailPrimitive(AddOp.$Pl,   </div><div class="line">                        LList.list2(runtime.lookupInCurrentFormEnvironment(Screen1.Lit14), runtime.callYailPrimitive(  </div><div class="line">                        MultiplyOp.$St, LList.list2(runtime.lookupInCurrentFormEnvironment(Screen1.Lit10),   </div><div class="line">                        runtime.lookupInCurrentFormEnvironment(Screen1.Lit12)), Screen1.Lit62, &quot;*&quot;)),   </div><div class="line">                        Screen1.Lit63, v7));  </div><div class="line">                runtime.addToCurrentFormEnvironment(Screen1.Lit14, runtime.callYailPrimitive(AddOp.$Pl,   </div><div class="line">                        LList.list2(runtime.lookupInCurrentFormEnvironment(Screen1.Lit14), runtime.callYailPrimitive(  </div><div class="line">                        numbers.modulo, LList.list2(runtime.lookupInCurrentFormEnvironment(Screen1.Lit14),   </div><div class="line">                        Screen1.Lit64), Screen1.Lit65, &quot;modulo&quot;)), Screen1.Lit66, v7));  </div><div class="line">                runtime.addToCurrentFormEnvironment(Screen1.Lit12, runtime.callYailPrimitive(AddOp.$Pl,   </div><div class="line">                        LList.list2(runtime.lookupInCurrentFormEnvironment(Screen1.Lit12), Screen1.Lit28),   </div><div class="line">                        Screen1.Lit67, v7));  </div><div class="line">            &#125;  </div><div class="line">  </div><div class="line">            v0 = runtime.isYailEqual(runtime.sanitizeComponentData(Invoke.invoke.apply2(runtime.lookupInCurrentFormEnvironment(  </div><div class="line">                    Screen1.Lit47), Screen1.Lit22)), runtime.lookupInCurrentFormEnvironment(Screen1.  </div><div class="line">                    Lit14)) != Boolean.FALSE ? runtime.$PcSetAndCoerceProperty$Ex(runtime.lookupInCurrentFormEnvironment(  </div><div class="line">                    Screen1.Lit0), Screen1.Lit16, Screen1.Lit68, Screen1.Lit18) : runtime.$PcSetAndCoerceProperty$Ex(  </div><div class="line">                    runtime.lookupInCurrentFormEnvironment(Screen1.Lit0), Screen1.Lit16, Screen1.Lit69,   </div><div class="line">                    Screen1.Lit18);  </div><div class="line">        &#125;  </div><div class="line">  </div><div class="line">        return v0;  </div><div class="line">    &#125;  </div><div class="line">分析代码后发现，开头有2句比较关键。拿出开头的两句：  </div><div class="line">runtime.addToCurrentFormEnvironment(Lit12, Lit28);  </div><div class="line">runtime.addToCurrentFormEnvironment(Lit14, Lit11);  </div><div class="line">通过分析可以发现这里给变量赋值了，所以继续追踪：  </div><div class="line">发现Lit12就是”tam_nombre”  </div><div class="line"> Screen1.Lit34 = IntNum.make(-2);  </div><div class="line">        Screen1.Lit33 = SimpleSymbol.valueOf(&quot;Width&quot;);  </div><div class="line">        Screen1.Lit32 = IntNum.make(3);  </div><div class="line">        Screen1.Lit31 = SimpleSymbol.valueOf(&quot;FontTypeface&quot;);  </div><div class="line">        Screen1.Lit30 = IntNum.make(14);  </div><div class="line">        Screen1.Lit29 = SimpleSymbol.valueOf(&quot;FontSize&quot;);  </div><div class="line">        Screen1.Lit28 = IntNum.make(1);  </div><div class="line">        Screen1.Lit27 = SimpleSymbol.valueOf(&quot;Alignment&quot;);  </div><div class="line">        Screen1.Lit26 = SimpleSymbol.valueOf(&quot;Label1&quot;);  </div><div class="line">        Screen1.Lit25 = new FString(&quot;com.google.devtools.simple.runtime.components.android.Label&quot;);  </div><div class="line">        Screen1.Lit24 = SimpleSymbol.valueOf(&quot;Initialize&quot;);  </div><div class="line">        Screen1.Lit23 = SimpleSymbol.valueOf(&quot;Screen1$Initialize&quot;);  </div><div class="line">        Screen1.Lit22 = SimpleSymbol.valueOf(&quot;Text&quot;);  </div><div class="line">        Screen1.Lit21 = SimpleSymbol.valueOf(&quot;lbl_rules&quot;);  </div><div class="line">        Screen1.Lit19 = SimpleSymbol.valueOf(&quot;Title&quot;);  </div><div class="line">        int[] v0_1 = new int[2];  </div><div class="line">        v0_1[0] = -14336;  </div><div class="line">        Screen1.Lit17 = IntNum.make(v0_1);  </div><div class="line">        Screen1.Lit16 = SimpleSymbol.valueOf(&quot;BackgroundColor&quot;);  </div><div class="line">        Screen1.Lit15 = SimpleSymbol.valueOf(&quot;nombre&quot;);  </div><div class="line">        Screen1.Lit14 = SimpleSymbol.valueOf(&quot;temp&quot;);  </div><div class="line">        Screen1.Lit13 = SimpleSymbol.valueOf(&quot;serial&quot;);  </div><div class="line">        Screen1.Lit12 = SimpleSymbol.valueOf(&quot;tam_nombre&quot;);  </div><div class="line">        Screen1.Lit11 = IntNum.make(0);  </div><div class="line">        Screen1.Lit10 = SimpleSymbol.valueOf(&quot;ano&quot;);  </div><div class="line">        Screen1.Lit9 = SimpleSymbol.valueOf(&quot;*the-null-value*&quot;);  </div><div class="line">        Screen1.Lit8 = SimpleSymbol.valueOf(&quot;getErrorType&quot;);  </div><div class="line">        Screen1.Lit7 = SimpleSymbol.valueOf(&quot;get&quot;);  </div><div class="line">        Screen1.Lit6 = SimpleSymbol.valueOf(&quot;show&quot;);  </div><div class="line">        Screen1.Lit5 = IntNum.make(5);  </div><div class="line">        Screen1.Lit4 = SimpleSymbol.valueOf(&quot;getMessage&quot;);  </div><div class="line">        Screen1.Lit3 = SimpleSymbol.valueOf(&quot;makeText&quot;);  </div><div class="line">        Screen1.Lit2 = Toast.class;  </div><div class="line">        Screen1.Lit1 = SimpleSymbol.valueOf(&quot;repl&quot;);  </div><div class="line">        Screen1.Lit0 = SimpleSymbol.valueOf(&quot;Screen1&quot;);</div></pre></td></tr></table></figure></p>
+<p>所以有：<br>tam_nombre = 1<br>temp = 0</p>
+<p>如果用户不输入一个name的话，他会显示出错，“请输入用户名”。看下一个条件中的判断语句，出现了一个numLEq，从字面上理解为“小于等于”。<br>分析代码发现其实判断条件为：<br>while(tam_nombre &lt;= len(nombre))  即为while(1&lt;= len(nombre))<br>从这里可以知道，name的长度至少要1位既可以满足条件。<br>同样的方法，我们继续分析下一个判断可以知道，计算出来的序列号储存在temp中。</p>
+<p>给出一组序列号：<br>Username：Ericky<br>Password：47652</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">KeygenCode：  </div><div class="line">  </div><div class="line">public class Keygen &#123;  </div><div class="line">  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">        int namelength =args[0].length();  </div><div class="line">        // TODO Auto-generated method stub  </div><div class="line">        int tam_nombre = 1;  </div><div class="line">        int temp = 0;  </div><div class="line">        int ano = 2014;  </div><div class="line">        while(tam_nombre&lt;=namelength )  </div><div class="line">        &#123;  </div><div class="line">        temp += ano * tam_nombre;  </div><div class="line">        temp += temp % 1638;  </div><div class="line">        tam_nombre += 1;  </div><div class="line">          </div><div class="line">        &#125;  </div><div class="line">        System.out.println(&quot;Serial : &quot;+temp);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>后面还有2个给大家玩吧~累 休息<br>总的来说主要提高了对smali代码的熟练度~收获还不错，纠正了一些理解上的偏差和巩固了之前的smali。(<em>^__^</em>) </p>
+<p>BY Ericky<br>2014.12.6</p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/Android/">Android</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/安全-安卓-apk反编译-代码分析-APK破解/">安全 安卓 apk反编译 代码分析 APK破解</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">The darkness is no darkness with thee.</a>
+  
+</div>
+<div class="theme-copyright">
+
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
